@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Group_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Group_Project.iml" afterDir="false" />
+    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Startup settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/djangogroupproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/djangogroupproject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/djangogroupproject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/djangogroupproject/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +64,19 @@
       <option name="presentableId" value="Default" />
       <updated>1749097808444</updated>
     </task>
+    <task id="LOCAL-00001" summary="Startup settings">
+      <option name="closed" value="true" />
+      <created>1749132317796</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1749132317796</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Startup settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Startup settings" />
   </component>
 </project>
