@@ -10,7 +10,7 @@ class User(AbstractUser):
         ('manager','Campaign Manager'),
         ('admin', 'Admin'),
     )
-    id = models.URLField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     country = models.CharField(max_length=50, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
@@ -20,11 +20,11 @@ class Profile(models.Model):
     phone = models.CharField(max_length=30, blank=True)
     bio = models.TextField(blank=True)
 
-class CampaignManagerAssignment (models.Model):
+class CampaignManagerAssignment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="manager_assignments")
     campaign = models.ForeignKey('campaigns.Campaign', on_delete=models.CASCADE, related_name="managers")
     organization = models.ForeignKey('organizations.Organization', on_delete=models.CASCADE)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="added_managers")
     created_at = models.DateTimeField(auto_now_add=True)
     class Meta:
-       unique_together = ('User', 'campaign')
+       unique_together = ('user', 'campaign')

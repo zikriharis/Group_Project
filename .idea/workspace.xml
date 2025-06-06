@@ -4,19 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Update tags and campaigns models.py">
+    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Update campaigns, donations, notifications, payments, sharing, support models.py">
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/donations/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/notifications/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/organizations/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/payments/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/sharing/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/support/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/tags/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/users/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/donations/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/donations/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/notifications/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/notifications/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/payments/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/payments/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/sharing/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/sharing/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/support/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/support/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/organizations/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/organizations/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/organizations/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/organizations/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/tags/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/tags/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/tags/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/tags/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/users/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_TAGS">
@@ -55,14 +75,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/zikri/OneDrive/Desktop/Sem_2/WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT/Group_Project/djangogroupproject/support",
+    "settings.editor.selected.configurable": "preferences.pathVariables"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python"
+    ]
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zikri\OneDrive\Desktop\Sem_2\WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT\Group_Project\djangogroupproject\support" />
+      <recent name="C:\Users\zikri\OneDrive\Desktop\Sem_2\WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT\Group_Project\djangogroupproject\sharing" />
+      <recent name="C:\Users\zikri\OneDrive\Desktop\Sem_2\WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT\Group_Project\djangogroupproject\notifications" />
+      <recent name="C:\Users\zikri\OneDrive\Desktop\Sem_2\WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT\Group_Project\djangogroupproject\payments" />
+      <recent name="C:\Users\zikri\OneDrive\Desktop\Sem_2\WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT\Group_Project\djangogroupproject\donations" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -119,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749200358597</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Update campaigns, donations, notifications, payments, sharing, support models.py">
+      <option name="closed" value="true" />
+      <created>1749203899986</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1749203899986</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -128,6 +171,7 @@
     <MESSAGE value="Merge media applications into campaigns application and expand Users models.py" />
     <MESSAGE value="Fix campaigns and organizations models.py" />
     <MESSAGE value="Update tags and campaigns models.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update tags and campaigns models.py" />
+    <MESSAGE value="Update campaigns, donations, notifications, payments, sharing, support models.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update campaigns, donations, notifications, payments, sharing, support models.py" />
   </component>
 </project>
