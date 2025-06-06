@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Merge media applications into campaigns application and expand Users models.py">
+    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Fix campaigns and organizations models.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/organizations/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/organizations/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/tags/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/tags/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,12 +23,16 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;zikriharis&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "history": [
+    {
+      "assignee": "zikriharis"
+    }
+  ],
+  "lastFilter": {
+    "assignee": "zikriharis"
   }
-}</component>
+}]]></component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/zikriharis/Group_Project.git&quot;,
@@ -96,13 +99,22 @@
       <option name="project" value="LOCAL" />
       <updated>1749135506468</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix campaigns and organizations models.py">
+      <option name="closed" value="true" />
+      <created>1749197723762</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1749197723762</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Startup settings" />
     <MESSAGE value="Add application and add field in campaign models" />
     <MESSAGE value="Merge media applications into campaigns application and expand Users models.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge media applications into campaigns application and expand Users models.py" />
+    <MESSAGE value="Fix campaigns and organizations models.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix campaigns and organizations models.py" />
   </component>
 </project>
