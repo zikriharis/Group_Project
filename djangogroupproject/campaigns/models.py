@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from users.models import User
 
 # Create your models here.
 class Campaign(models.Model):

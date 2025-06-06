@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Fix campaigns and organizations models.py">
+    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Update tags and campaigns models.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/tags/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/tags/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/donations/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/donations/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/notifications/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/notifications/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/payments/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/payments/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/sharing/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/sharing/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/support/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/support/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +111,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749197723762</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Update tags and campaigns models.py">
+      <option name="closed" value="true" />
+      <created>1749200358597</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1749200358597</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -115,6 +127,7 @@
     <MESSAGE value="Add application and add field in campaign models" />
     <MESSAGE value="Merge media applications into campaigns application and expand Users models.py" />
     <MESSAGE value="Fix campaigns and organizations models.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix campaigns and organizations models.py" />
+    <MESSAGE value="Update tags and campaigns models.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update tags and campaigns models.py" />
   </component>
 </project>
