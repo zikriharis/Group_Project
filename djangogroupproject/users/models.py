@@ -26,6 +26,5 @@ class CampaignManagerAssignment (models.Model):
     organization = models.ForeignKey('organizations.Organization', on_delete=models.CASCADE)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="added_managers")
     created_at = models.DateTimeField(auto_now_add=True)
-
-class Meta:
-    unique_together = ('User', 'campaign')
+    class Meta:
+       unique_together = ('User', 'campaign')

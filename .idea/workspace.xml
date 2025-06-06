@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Add application and add field in campaign models">
+    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Merge media applications into campaigns application and expand Users models.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/media/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/media/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/media/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/media/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/media/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/media/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/media/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/organizations/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/organizations/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djangogroupproject/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,38 +24,38 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "zikriharis"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;zikriharis&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/zikriharis/Group_Project.git",
-    "accountId": "7be29844-1603-410c-8302-2d9cb69c00f1"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/zikriharis/Group_Project.git&quot;,
+    &quot;accountId&quot;: &quot;7be29844-1603-410c-8302-2d9cb69c00f1&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2y4dWF3BT6WgsJghXHecEdZTutu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "settings.editor.selected.configurable": "preferences.pathVariables"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -93,12 +88,21 @@
       <option name="project" value="LOCAL" />
       <updated>1749134390066</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Merge media applications into campaigns application and expand Users models.py">
+      <option name="closed" value="true" />
+      <created>1749135506468</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1749135506468</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Startup settings" />
     <MESSAGE value="Add application and add field in campaign models" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add application and add field in campaign models" />
+    <MESSAGE value="Merge media applications into campaigns application and expand Users models.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge media applications into campaigns application and expand Users models.py" />
   </component>
 </project>

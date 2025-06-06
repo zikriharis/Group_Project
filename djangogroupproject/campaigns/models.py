@@ -33,8 +33,8 @@ class Campaign(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField('tags.Tag', through='tags.CampaignTag', blank=True)
 
-def __str__(self):
-    return self.title
+    def __str__(self):
+        return self.title
 
 class CampaignPageBlock(models.Model):
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE, related_name='blocks')
@@ -47,7 +47,7 @@ class CampaignPageBlock(models.Model):
     media_file = models.FileField(upload_to='campaign/media/', blank=True, null=True)
     sort_order = models.PositiveIntegerField(default=0)
 
-class Meta:
-    ordering = ['sort_order']
+    class Meta:
+        ordering = ['sort_order']
 
 
