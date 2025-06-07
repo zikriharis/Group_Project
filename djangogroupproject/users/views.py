@@ -9,7 +9,7 @@ def register_view(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
+            user.set_password(form.cleaned_data['password']) # ensure the password is hashed
             user.save()
             Profile.objects.create(user=user) # linter false positive?
             return redirect('login')

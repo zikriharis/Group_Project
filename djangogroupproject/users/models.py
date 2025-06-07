@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
+# AbstractUser already contain username, email, password and more
 class User(AbstractUser):
     ROLE_CHOICES = (
         ('donor', 'Donor'),
@@ -14,6 +15,7 @@ class User(AbstractUser):
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     country = models.CharField(max_length=50, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")

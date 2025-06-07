@@ -88,7 +88,12 @@ class CampaignDocument(models.Model):
     ), default='pending')
     reviewed_by = models.ForeignKey('users.User', null=True, blank=True, on_delete=models.SET_NULL)
     rejection_reason = models.TextField(blank=True, null=True)
-
+'''
+Each row in the model with the ForeignKey is related to one row in another model, but the other model can relate
+ to many of these.
+Use case: A Comment belongs to one Post, but a Post can have many Comments
+A field in one model that references the primary key of another model.
+'''
 class Like(models.Model):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE)
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)

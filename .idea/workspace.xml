@@ -4,25 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Update campaigns, donations, notifications, payments, sharing, support models.py">
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/donations/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/notifications/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/organizations/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/payments/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/sharing/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/support/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/tags/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/users/forms.py" afterDir="false" />
+    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Update application campaigns, users, organizations,tags models.py, forms.py, views.py, admin.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/organizations/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/organizations/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/organizations/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/organizations/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/tags/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/tags/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/tags/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/tags/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/users/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/users/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/donations/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/donations/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/donations/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/donations/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/donations/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/donations/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djangogroupproject/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/users/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/djangogroupproject/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/users/views.py" afterDir="false" />
     </list>
@@ -162,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749203899986</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Update application campaigns, users, organizations,tags models.py, forms.py, views.py, admin.py">
+      <option name="closed" value="true" />
+      <created>1749229711671</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1749229711671</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -172,6 +168,7 @@
     <MESSAGE value="Fix campaigns and organizations models.py" />
     <MESSAGE value="Update tags and campaigns models.py" />
     <MESSAGE value="Update campaigns, donations, notifications, payments, sharing, support models.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update campaigns, donations, notifications, payments, sharing, support models.py" />
+    <MESSAGE value="Update application campaigns, users, organizations,tags models.py, forms.py, views.py, admin.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update application campaigns, users, organizations,tags models.py, forms.py, views.py, admin.py" />
   </component>
 </project>
