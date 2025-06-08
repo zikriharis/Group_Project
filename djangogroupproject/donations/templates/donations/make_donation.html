@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donate to {{ campaign.title }}</title>
+    <link rel="stylesheet" href="{% static 'donations/css/donation.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Messages -->
+      {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Campaign Header -->
+      <div class="card">
+        <div class="campaign-header">
+          <h1 class="campaign-title">{{ campaign.title }}</h1>
+          <p class="campaign-org">by {{ campaign.organization.name }}</p>
+        </div>
+
+        <!-- Campaign Progress -->
+        <div class="progress-section">
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              style="width: {{ progress_percentage }}%"
+            ></div>
+          </div>
+          <div class="progress-stats">
+            <div class="stat">
+              <div class="stat-value">RM {{ total_raised|floatformat:0 }}</div>
+              <div class="stat-label">Raised</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">
+                RM {{ campaign.goal_amount|floatformat:0 }}
+              </div>
+              <div class="stat-label">Goal</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">
+                {{ progress_percentage|floatformat:1 }}%
+              </div>
+              <div class="stat-label">Complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Donation Form -->
+      <div class="card">
+        <form method="post" class="donation-form">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label class="form-label">Choose Amount (RM)</label>
+            <div class="amount-buttons">
+              <div class="amount-btn" onclick="setAmount(25)">RM 25</div>
+              <div class="amount-btn" onclick="setAmount(50)">RM 50</div>
+              <div class="amount-btn" onclick="setAmount(100)">RM 100</div>
+              <div class="amount-btn" onclick="setAmount(250)">RM 250</div>
+            </div>
+            <input
+              type="number"
+              name="amount"
+              id="amount"
+              class="form-input"
+              placeholder="Enter custom amount"
+              min="5"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="donor_name"
+              >Your Name (Optional)</label
+            >
+            <input
+              type="text"
+              name="donor_name"
+              id="donor_name"
+              class="form-input"
+              placeholder="Enter your name or leave blank for anonymous"
+            />
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-group">
+              <input
+                type="checkbox"
+                name="is_anonymous"
+                id="is_anonymous"
+                class="checkbox"
+              />
+              <label for="is_anonymous">Make this donation anonymous</label>
+            </div>
+          </div>
+
+          <button type="submit" class="donate-btn">Donate Now</button>
+        </form>
+      </div>
+
+      <!-- Recent Donations -->
+      {% if recent_donations %}
+      <div class="card">
+        <div class="recent-donations">
+          <h3 class="recent-title">Recent Donations</h3>
+          {% for donation in recent_donations %}
+          <div class="donation-item">
+            <div>
+              <div class="donor-name">
+                {{ donation.donor_name|default:"Anonymous" }}
+              </div>
+              <div class="donation-time">
+                {{ donation.created_at|timesince }} ago
+              </div>
+            </div>
+            <div class="donation-amount">RM {{ donation.amount }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <script src="{% static 'donations/js/donation.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You for Your Donation</title>
+    <link rel="stylesheet" href="{% static 'donations/css/donation.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="campaign-header" style="text-align: center">
+          <h1>🎉 Thank You!</h1>
+          <p>Your donation has been successfully processed</p>
+        </div>
+
+        <div class="progress-section">
+          <h2>Donation Details</h2>
+          <p><strong>Amount:</strong> RM {{ donation.amount }}</p>
+          <p><strong>Campaign:</strong> {{ donation.campaign.title }}</p>
+          <p><strong>Reference:</strong> {{ donation.payment_reference }}</p>
+
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              style="width: {{ progress_percentage }}%"
+            ></div>
+          </div>
+          <p style="text-align: center; margin-top: 10px">
+            Campaign is now {{ progress_percentage|floatformat:1 }}% funded!
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
