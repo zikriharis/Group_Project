@@ -1,37 +1,38 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thank You for Your Donation</title>
-    <link rel="stylesheet" href="{% static 'donations/css/donation.css' %}" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="card">
-        <div class="campaign-header" style="text-align: center">
-          <h1>🎉 Thank You!</h1>
-          <p>Your donation has been successfully processed</p>
+
+{% block title %}Thank You for Your Donation - FundRaise Platform{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'donations/css/donation.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 2rem;">
+    <div class="card">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; text-align: center;">
+            <h1>🎉 Thank You!</h1>
+            <p>Your donation has been successfully processed</p>
         </div>
 
         <div class="progress-section">
-          <h2>Donation Details</h2>
-          <p><strong>Amount:</strong> RM {{ donation.amount }}</p>
-          <p><strong>Campaign:</strong> {{ donation.campaign.title }}</p>
-          <p><strong>Reference:</strong> {{ donation.payment_reference }}</p>
+            <h2>Donation Details</h2>
+            <p><strong>Amount:</strong> RM {{ donation.amount }}</p>
+            <p><strong>Campaign:</strong> {{ donation.campaign.title }}</p>
+            <p><strong>Reference:</strong> {{ donation.payment_reference }}</p>
 
-          <div class="progress-bar">
-            <div
-              class="progress-fill"
-              style="width: {{ progress_percentage }}%"
-            ></div>
-          </div>
-          <p style="text-align: center; margin-top: 10px">
-            Campaign is now {{ progress_percentage|floatformat:1 }}% funded!
-          </p>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{ progress_percentage }}%"></div>
+            </div>
+            <p style="text-align: center; margin-top: 10px">
+                Campaign is now {{ progress_percentage|floatformat:1 }}% funded!
+            </p>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="{% url 'campaigns:list' %}" class="btn btn-primary">Browse More Campaigns</a>
+                <a href="{% url 'donations:my_donations' %}" class="btn btn-secondary">View My Donations</a>
+            </div>
         </div>
-      </div>
     </div>
-  </body>
-</html>
+</div>
+{% endblock %}

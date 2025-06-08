@@ -1,75 +1,59 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Donations</title>
-    <link rel="stylesheet" href="{% static 'donations/css/donation.css' %}" />
-  </head>
-  <body>
-    <div class="dashboard-header">
-      <h1>My Donations</h1>
-      <p>Thank you for making a difference!</p>
-    </div>
 
+{% block title %}My Donations - FundRaise Platform{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'donations/css/donation.css' %}">
+{% endblock %}
+
+{% block content %}
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem 0; text-align: center;">
     <div class="container">
-      <!-- Stats Overview -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">RM {{ total_donated|floatformat:0 }}</div>
-          <div class="stat-text">Total Donated</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">{{ donation_count }}</div>
-          <div class="stat-text">Donations Made</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">{{ campaigns_supported }}</div>
-          <div class="stat-text">Campaigns Supported</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">{{ badges.count }}</div>
-          <div class="stat-text">Badges Earned</div>
-        </div>
-      </div>
-
-      <!-- Badges -->
-      {% if badges %}
-      <div class="badges-section">
-        <h3>Your Badges</h3>
-        {% for badge in badges %}
-        <span class="badge-item">{{ badge.get_badge_type_display }}</span>
-        {% endfor %}
-      </div>
-      {% endif %}
-
-      <!-- Donation History -->
-      <div class="donation-history">
-        <h3>Donation History</h3>
-        {% for donation in donations %}
-        <div class="donation-row">
-          <div class="campaign-info">
-            <h4>{{ donation.campaign.title }}</h4>
-            <div class="campaign-org">
-              {{ donation.campaign.organization.name }}
-            </div>
-          </div>
-          <div class="donation-meta">
-            <div class="amount">RM {{ donation.amount }}</div>
-            <div class="date">{{ donation.created_at|date:"M d, Y" }}</div>
-          </div>
-        </div>
-        {% empty %}
-        <p>
-          No donations yet.
-          <a
-            href="{% url 'donations:make_donation' campaign_id='33daff16-171d-4f57-a921-c3e709e42be5' %}"
-            >Make your first donation!</a
-          >
-        </p>
-        {% endfor %}
-      </div>
+        <h1>My Donations</h1>
+        <p>Thank you for making a difference!</p>
     </div>
-  </body>
-</html>
+</div>
+
+<div class="container margin-top-2rem">
+    <!-- Stats Overview -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <div class="card">
+            <div style="padding: 1.5rem; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: #10b981;">RM {{ total_donated|floatformat:0 }}</div>
+                <div style="color: #64748b;">Total Donated</div>
+            </div>
+        </div>
+        <div class="card">
+            <div style="padding: 1.5rem; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: #667eea;">{{ donation_count }}</div>
+                <div style="color: #64748b;">Donations Made</div>
+            </div>
+        </div>
+        <div class="card">
+            <div style="padding: 1.5rem; text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: #f59e0b;">{{ campaigns_supported }}</div>
+                <div style="color: #64748b;">Campaigns Supported</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donations List -->
+    <div class="card">
+        <div style="padding: 2rem;">
+            <h3>Your Donation History</h3>
+            {% for donation in donations %}
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #e5e7eb;">
+                <div>
+                    <div style="font-weight: 600;">{{ donation.campaign.title }}</div>
+                    <div style="color: #64748b; font-size: 0.875rem;">{{ donation.created_at|date:"M d, Y" }}</div>
+                </div>
+                <div style="font-weight: 600; color: #10b981;">RM {{ donation.amount }}</div>
+            </div>
+            {% empty %}
+            <p>No donations yet. <a href="{% url 'campaigns:list' %}">Browse campaigns to donate!</a></p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

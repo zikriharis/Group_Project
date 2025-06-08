@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}FundRaise Platform{% endblock %}</title>
+
+    <!-- Universal CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+
+    <!-- Page-specific CSS -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Universal Header with Mobile Menu -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">FundRaise</a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
+                    <ul class="nav-menu">
+                        <li><a href="{% url 'campaigns:list' %}">Campaigns</a></li>
+                        <li><a href="{% url 'donations:my_donations' %}">My Donations</a></li>
+                        <li><a href="/admin/">Admin</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <nav class="mobile-nav" id="mobileNav">
+                <ul class="mobile-nav-menu">
+                    <li><a href="{% url 'campaigns:list' %}">Campaigns</a></li>
+                    <li><a href="{% url 'donations:my_donations' %}">My Donations</a></li>
+                    <li><a href="/admin/">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>{% block content %}{% endblock %}</main>
+
+    <!-- Universal Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 FundRaise Platform. Making a difference together.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Universal JavaScript -->
+    <script src="{% static 'js/base.js' %}"></script>
+
+    <!-- Page-specific JavaScript -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

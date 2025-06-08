@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Donate to {{ campaign.title }} - FundRaise Platform{% endblock %}
+{% block title %}{{ campaign.title }} - FundRaise Platform{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'donations/css/donation.css' %}">
+<link rel="stylesheet" href="{% static 'campaigns/css/campaigns.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -38,40 +39,21 @@
         </div>
     </div>
 
-    <!-- Donation Form -->
+    <!-- Campaign Description -->
     <div class="card">
         <div style="padding: 2rem;">
-            <form method="post">
-                {% csrf_token %}
-
-                <div class="form-group">
-                    <label class="form-label">Choose Amount (RM)</label>
-                    <div class="amount-buttons">
-                        <button type="button" class="amount-btn" onclick="setAmount(25)">RM 25</button>
-                        <button type="button" class="amount-btn" onclick="setAmount(50)">RM 50</button>
-                        <button type="button" class="amount-btn" onclick="setAmount(100)">RM 100</button>
-                        <button type="button" class="amount-btn" onclick="setAmount(250)">RM 250</button>
-                    </div>
-                    <input type="number" id="amount" name="amount" class="form-input" placeholder="Enter custom amount" step="0.01" min="5" required>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Your Name (Optional)</label>
-                    <input type="text" name="donor_name" class="form-input" placeholder="Enter your name or leave blank for anonymous">
-                </div>
-
-                <div class="form-group">
-                    <label style="display: flex; align-items: center; gap: 0.5rem;">
-                        <input type="checkbox" name="is_anonymous"> Make this donation anonymous
-                    </label>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Donate Now</button>
-            </form>
-
-            <div style="margin-top: 2rem;">
-                <a href="{% url 'campaigns:detail' campaign_id=campaign.id %}" class="btn btn-secondary">
-                    ← Back to Campaign
+            <h3>About This Campaign</h3>
+            <p>{{ campaign.brief_description }}</p>
+            
+            <div style="margin: 2rem 0;">
+                <a href="{% url 'donations:make_donation' campaign_id=campaign.id %}" class="btn btn-primary">
+                    Donate to This Campaign
+                </a>
+            </div>
+            
+            <div>
+                <a href="{% url 'campaigns:list' %}" class="btn btn-secondary">
+                    ← Back to All Campaigns
                 </a>
             </div>
         </div>
@@ -95,8 +77,4 @@
     </div>
     {% endif %}
 </div>
-{% endblock %}
-
-{% block extra_js %}
-<script src="{% static 'donations/js/donation.js' %}"></script>
 {% endblock %}

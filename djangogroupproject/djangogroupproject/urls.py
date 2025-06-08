@@ -22,5 +22,8 @@ from main_landing_pages.views import greeting
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", greeting),
+    path("campaigns/", include("campaigns.urls")),
+    # path("organizations/", include("organizations.urls")),
+    # path("users/", include("users.urls")),
     path("donations/", include("donations.urls")),
 ]
