@@ -1,6 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Sum
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import Campaign
+from .forms import CampaignForm
 
 
 def campaign_list(request):
@@ -57,3 +60,24 @@ def campaign_detail(request, campaign_id):
         "recent_donations": recent_donations,
     }
     return render(request, "campaigns/detail.html", context)
+
+
+@login_required
+def campaign_create(request):
+    """Handle creation of a new campaign"""
+    if request.method == 'POST':
+        form = CampaignForm(request.POST, request.FILES)
+        if form.is_valid():
+            campaign = form.save(commit=False)
+            campaign.creator = request.user
+            campaign.save()
+            messages.success(request, 'Your campaign has been created successfully!')
+            return redirect('campaigns:detail', campaign_id=campaign.id)
+    else:
+        form = CampaignForm()
+    
+    context = {
+        'form': form,
+        'title': 'Create New Campaign'
+    }
+    return render(request, 'campaigns/campaign_form.html', context)

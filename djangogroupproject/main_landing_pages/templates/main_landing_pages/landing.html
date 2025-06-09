@@ -1,0 +1,455 @@
+{% extends 'main_landing_pages/base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="gradient-bg text-white pt-8 pb-16 md:pt-16 md:pb-32">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center">
+            <!-- Hero Content -->
+            <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-10 xl:pr-16">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    Fund Your Dreams,<br><span class="text-indigo-200">Change the World</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-indigo-100 mb-8 max-w-2xl">
+                    Join thousands of people funding ideas that matter. Create or support campaigns that make a real difference.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="{% url 'campaigns:list' %}" class="btn-primary hover:shadow-lg hover:-translate-y-1 transform transition-all duration-300">
+                        <i class="fas fa-search mr-2"></i> Explore Campaigns
+                    </a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'campaigns:create' %}" class="btn-outline bg-white text-indigo-600 hover:bg-indigo-50 hover:border-indigo-700 hover:text-indigo-700">
+                            <i class="fas fa-plus-circle mr-2"></i> Start a Campaign
+                        </a>
+                    {% else %}
+                        <a href="{% url 'users:register' %}?next={% url 'campaigns:list' %}" class="btn-outline bg-white text-indigo-600 hover:bg-indigo-50 hover:border-indigo-700 hover:text-indigo-700">
+                            <i class="fas fa-plus-circle mr-2"></i> Start a Campaign
+                        </a>
+                    {% endif %}
+                </div>
+                
+                <!-- Trust Indicators -->
+                <div class="mt-12 flex flex-wrap items-center gap-6 text-indigo-100">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-2xl text-green-300 mr-2"></i>
+                        <span>Trusted by 100,000+ donors</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-shield-alt text-2xl text-green-300 mr-2"></i>
+                        <span>Secure payments</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hero Image -->
+            <div class="lg:w-1/2 relative">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80" 
+                         alt="Crowdfunding" 
+                         class="rounded-2xl shadow-2xl w-full h-auto max-h-[500px] object-cover object-center">
+                    
+                    <!-- Floating Stats -->
+                    <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg text-gray-800">
+                        <div class="text-2xl font-bold text-indigo-600">$5M+</div>
+                        <div class="text-sm text-gray-600">Raised</div>
+                    </div>
+                    
+                    <div class="absolute -top-6 -right-6 bg-indigo-600 p-4 rounded-xl shadow-lg text-white">
+                        <div class="text-2xl font-bold">1,200+</div>
+                        <div class="text-sm text-indigo-100">Campaigns</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Wave Divider -->
+    <div class="absolute bottom-0 left-0 right-0 overflow-hidden">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-16 md:h-24">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" 
+                  opacity="0.25" class="fill-current text-white"></path>
+            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" 
+                  opacity="0.5" class="fill-current text-white"></path>
+            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" 
+                  class="fill-current text-white"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="relative py-20 md:py-28 bg-gradient-to-b from-white to-indigo-50 overflow-hidden" id="how-it-works">
+    <!-- Decorative elements -->
+    <div class="absolute top-0 right-0 w-1/3 h-72 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+    <div class="absolute bottom-0 left-0 w-1/3 h-72 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+    
+    <div class="relative container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-4xl mx-auto mb-20">
+            <div class="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 mb-4 animate-fade-in">
+                <span class="flex h-3 w-3 relative mr-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-indigo-600"></span>
+                </span>
+                HOW IT WORKS
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-5 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+                Turn Your Ideas Into Reality
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Join thousands of creators who've brought their dreams to life with our simple 3-step process.
+            </p>
+        </div>
+        
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
+            <!-- Step 1 -->
+            <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-indigo-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="relative z-10">
+                    <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center text-white text-3xl font-bold mb-6 mx-auto transform transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <div class="text-center mb-2">
+                        <span class="inline-block text-sm font-medium text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full mb-3">Step 1</span>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Create Your Campaign</h3>
+                        <p class="text-gray-600 mb-6">Craft your story, set a funding goal, and create attractive rewards for your backers with our easy-to-use tools.</p>
+                    </div>
+                    <a href="{% url 'campaigns:list' %}" 
+                       class="group/btn inline-flex items-center justify-center w-full mt-4 px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-sm transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md">
+                        <span class="relative z-10 flex items-center">
+                            Get Started
+                        </span>
+                        <span class="absolute h-full w-0 bg-indigo-700 rounded-xl transition-all duration-300 group-hover/btn:w-full -z-10"></span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-purple-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="relative z-10">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white text-3xl font-bold mb-6 mx-auto transform transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <div class="text-center mb-2">
+                        <span class="inline-block text-sm font-medium text-purple-600 bg-purple-50 px-3 py-1 rounded-full mb-3">Step 2</span>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Share With Community</h3>
+                        <p class="text-gray-600 mb-6">Leverage social media and our built-in tools to spread the word and grow your community of supporters.</p>
+                    </div>
+                    <a href="#" 
+                       class="group/btn inline-flex items-center justify-center w-full mt-4 px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 shadow-sm transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md">
+                        <span class="relative z-10 flex items-center">
+                            Share Tips
+                        </span>
+                        <span class="absolute h-full w-0 bg-purple-700 rounded-xl transition-all duration-300 group-hover/btn:w-full -z-10"></span>
+                    </a>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-pink-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="relative z-10">
+                    <div class="w-20 h-20 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center text-white text-3xl font-bold mb-6 mx-auto transform transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="text-center mb-2">
+                        <span class="inline-block text-sm font-medium text-pink-600 bg-pink-50 px-3 py-1 rounded-full mb-3">Step 3</span>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Reach Your Goal</h3>
+                        <p class="text-gray-600 mb-6">Collect funds, engage with your backers, and bring your creative vision to life with our full support.</p>
+                    </div>
+                    <a href="{% url 'campaigns:list' %}" 
+                       class="group/btn inline-flex items-center justify-center w-full mt-4 px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 shadow-sm transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md">
+                        <span class="relative z-10 flex items-center">
+                            Explore Projects
+                        </span>
+                        <span class="absolute h-full w-0 bg-pink-700 rounded-xl transition-all duration-300 group-hover/btn:w-full -z-10"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 transform transition-all duration-500 hover:scale-105">
+                <div class="text-4xl font-bold text-indigo-600 mb-2">10,000+</div>
+                <div class="text-gray-600">Projects Funded</div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 transform transition-all duration-500 hover:scale-105">
+                <div class="text-4xl font-bold text-indigo-600 mb-2">$50M+</div>
+                <div class="text-gray-600">Raised</div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 transform transition-all duration-500 hover:scale-105">
+                <div class="text-4xl font-bold text-indigo-600 mb-2">500K+</div>
+                <div class="text-gray-600">Backers</div>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 transform transition-all duration-500 hover:scale-105">
+                <div class="text-4xl font-bold text-indigo-600 mb-2">150+</div>
+                <div class="text-gray-600">Countries</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Campaigns -->
+<section class="py-16 md:py-24 bg-gray-50" id="campaigns">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="inline-block px-3 py-1 text-sm font-semibold text-indigo-600 bg-indigo-100 rounded-full mb-4">FEATURED CAMPAIGNS</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Discover Amazing Projects</h2>
+            <p class="text-xl text-gray-600">Support innovative ideas and be part of something extraordinary.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for campaign in featured_campaigns %}
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 hover:border-indigo-100">
+                <!-- Campaign Image -->
+                <div class="relative overflow-hidden h-56">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+                    <img src="{{ campaign.image_url|default:'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' }}" 
+                         alt="{{ campaign.title }}" 
+                         class="relative z-10 w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:opacity-90"
+                         loading="lazy">
+                    
+                    <!-- Badges -->
+                    <div class="absolute top-4 right-4 z-20 flex flex-col space-y-2">
+                        {% if campaign.is_ending_soon %}
+                        <div class="bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
+                            <i class="fas fa-clock mr-1"></i> Ending Soon
+                        </div>
+                        {% endif %}
+                        {% if campaign.is_featured %}
+                        <div class="bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
+                            <i class="fas fa-star mr-1"></i> Featured
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                        <div class="w-full p-5 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <div class="flex items-center text-white/90">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mr-3">
+                                    <i class="fas fa-user text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium">{{ campaign.creator_name|default:"Anonymous" }}</p>
+                                    <p class="text-xs text-white/80">Campaign Creator</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Category and Time -->
+                    <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                        <div class="flex items-center">
+                            <span class="text-sm font-medium text-white bg-indigo-600/90 px-3 py-1 rounded-full">{{ campaign.category|default:"General" }}</span>
+                            <span class="mx-3 w-1 h-1 bg-white/50 rounded-full"></span>
+                            <span class="text-sm text-white/90 flex items-center">
+                                <i class="far fa-clock mr-1 text-xs"></i> {{ campaign.days_left }} days left
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Campaign Details -->
+                <div class="p-6">
+                    <!-- Title and Stats -->
+                    <div class="mb-4">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2 hover:text-indigo-600 transition-colors duration-300" 
+                            title="{{ campaign.title }}">
+                            <a href="{% url 'campaigns:campaign_detail' campaign.slug %}" class="hover:underline">
+                                {{ campaign.title }}
+                            </a>
+                        </h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2">{{ campaign.short_description|default:"Help support this amazing campaign and be part of something special!" }}</p>
+                    </div>
+                    
+                    <!-- Progress Section -->
+                    <div class="mb-5">
+                        <!-- Raised Amount -->
+                        <div class="flex justify-between items-baseline mb-1">
+                            <span class="text-2xl font-bold text-gray-900">${{ campaign.amount_raised|floatformat:0 }}</span>
+                            <span class="text-sm text-gray-500">raised of ${{ campaign.goal|floatformat:0 }} goal</span>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-gray-100 rounded-full h-2.5 mb-2">
+                            <div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-2.5 rounded-full relative overflow-hidden" 
+                                 style="width: {{ campaign.percent_funded }}%">
+                                <div class="absolute inset-0 bg-gradient-to-r from-indigo-400 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stats -->
+                        <div class="flex justify-between text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-percentage mr-1 text-indigo-500"></i>
+                                <span>{{ campaign.percent_funded }}% funded</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-1 text-indigo-500"></i>
+                                <span>{{ campaign.backers_count|default:0 }} backers</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex space-x-3">
+                        <a href="{% url 'campaigns:detail' campaign_id=campaign.id %}" 
+                           class="group/btn flex-1 inline-flex items-center justify-center px-4 py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-sm transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md">
+                            <span class="relative z-10 flex items-center">
+                                <i class="fas fa-donate mr-2"></i>
+                                Donate Now
+                            </span>
+                            <span class="absolute h-full w-0 bg-indigo-700 rounded-lg transition-all duration-300 group-hover/btn:w-full -z-10"></span>
+                        </a>
+                        
+                        <div class="relative">
+                            <button class="w-12 h-12 flex items-center justify-center bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 transition-all duration-300 group/bookmark" 
+                                    data-campaign-id="{{ campaign.id }}"
+                                    aria-label="Save to bookmarks">
+                                <i class="far fa-heart text-gray-600 group-hover/bookmark:text-red-500 transition-colors duration-300"></i>
+                                <span class="absolute -top-2 -right-2 bg-white border border-gray-200 text-xs font-medium px-1.5 py-0.5 rounded-full shadow-sm">
+                                    {{ campaign.bookmarks_count|default:0 }}
+                                </span>
+                            </button>
+                            <div class="tooltip absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover/bookmark:opacity-100 transition-opacity duration-200 pointer-events-none">
+                                Save to bookmarks
+                                <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-gray-900 rotate-45"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tags -->
+                    {% if campaign.tags %}
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        {% for tag in campaign.tags|slice:":3" %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                            #{{ tag }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <!-- Empty State -->
+            <div class="col-span-3">
+                <div class="relative bg-gradient-to-br from-indigo-50 to-blue-50 rounded-2xl p-10 text-center overflow-hidden">
+                    <!-- Decorative elements -->
+                    <div class="absolute -top-20 -right-20 w-64 h-64 bg-indigo-100 rounded-full opacity-30"></div>
+                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-purple-100 rounded-full opacity-30"></div>
+                    
+                    <div class="relative z-10 max-w-2xl mx-auto">
+                        <div class="w-24 h-24 bg-white rounded-2xl shadow-sm border border-indigo-100 flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-lightbulb text-4xl text-yellow-400"></i>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">No Featured Campaigns Yet</h3>
+                        <p class="text-gray-600 mb-8 max-w-lg mx-auto text-lg">
+                            We're currently curating the most inspiring campaigns. Be the first to create something amazing!
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <a href="{% url 'campaigns:list' %}" 
+                               class="group/btn inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                                <span class="relative z-10 flex items-center">
+                                    <i class="fas fa-rocket mr-3"></i>
+                                    Start Your Campaign
+                                </span>
+                                <span class="absolute h-full w-0 bg-indigo-700 rounded-xl transition-all duration-300 group-hover/btn:w-full -z-10"></span>
+                            </a>
+                            
+                            <a href="{% url 'campaigns:list' %}" 
+                               class="inline-flex items-center justify-center px-8 py-4 border-2 border-indigo-600 text-base font-medium rounded-xl text-indigo-600 bg-white hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300">
+                                <i class="far fa-compass mr-2"></i> Explore All Campaigns
+                            </a>
+                        </div>
+                        
+                        <div class="mt-8 pt-6 border-t border-gray-200">
+                            <p class="text-sm text-gray-500 mb-3">Have questions about getting started?</p>
+                            <a href="#" class="text-indigo-600 font-medium hover:text-indigo-500 inline-flex items-center group">
+                                <span>Learn how it works</span>
+                                <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="mt-12 text-center">
+            <a href="{% url 'campaigns:list' %}" class="btn-outline border-indigo-600 text-indigo-600 hover:bg-indigo-50 inline-flex items-center group">
+                View All Campaigns
+                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-200"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="relative py-20 md:py-28 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="absolute top-0 left-0 w-full h-full opacity-10">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full transform translate-x-32 -translate-y-32"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full transform -translate-x-48 translate-y-48"></div>
+    </div>
+    
+    <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="inline-block px-4 py-1.5 text-sm font-semibold text-indigo-100 bg-white/20 rounded-full mb-6">JOIN OUR COMMUNITY</span>
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 leading-tight">Ready to Make a <span class="text-yellow-300">Real Impact</span>?</h2>
+            <p class="text-xl text-indigo-100 max-w-3xl mx-auto mb-10">
+                Join thousands of backers and creators who are bringing innovative ideas to life. Whether you want to start your own campaign or support amazing projects, your journey starts here.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="{% url 'campaigns:list' %}" 
+                   class="group relative inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-700 font-bold rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <span class="relative z-10 flex items-center">
+                        <i class="fas fa-rocket mr-3"></i>
+                        Start Your Campaign
+                    </span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
+                
+                <a href="{% url 'campaigns:list' %}" 
+                   class="group relative inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white/10 transition-all duration-300">
+                    <span class="relative z-10 flex items-center">
+                        <i class="fas fa-search mr-3"></i>
+                        Explore Projects
+                    </span>
+                </a>
+            </div>
+            
+            <div class="mt-10 flex items-center justify-center space-x-6 text-indigo-100 text-sm">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-yellow-300 mr-2"></i>
+                    <span>No platform fees</span>
+                </div>
+                <div class="h-4 w-px bg-white/30"></div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-yellow-300 mr-2"></i>
+                    <span>Secure payments</span>
+                </div>
+                <div class="h-4 w-px bg-white/30"></div>
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-yellow-300 mr-2"></i>
+                    <span>24/7 support</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom wave divider -->
+    <div class="absolute bottom-0 left-0 right-0">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="w-full h-16 md:h-24">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" 
+                  opacity="0.25" class="fill-current text-white"></path>
+            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" 
+                  opacity="0.5" class="fill-current text-white"></path>
+            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" 
+                  class="fill-current text-white"></path>
+        </svg>
+    </div>
+</section>
+{% endblock %}

@@ -13,6 +13,15 @@ class Campaign(models.Model):
         ('stopped', 'Stopped'),
         ('completed', 'Completed'),
     )
+    CATEGORY_CHOICES = (
+        ('technology', 'Technology'),
+        ('education', 'Education'),
+        ('health', 'Health'),
+        ('art', 'Art'),
+        ('environment', 'Environment'),
+        ('community', 'Community'),
+        ('others', 'Others'),
+    )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     organization = models.ForeignKey(
         'organizations.Organization',
@@ -21,8 +30,10 @@ class Campaign(models.Model):
     )
     slug = models.SlugField(unique=True)
     title = models.CharField(max_length=255)
-    brief_description = models.CharField(max_length=500)
-    main_image = models.ImageField(upload_to='campaign/main_images/')
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='campaign/images/', blank=True, null=True)
+    video_url = models.URLField(blank=True, null=True)
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, default='others', blank=True, null=True)
     country = models.CharField(max_length=100)
     start_date = models.DateField()
     end_date = models.DateField()

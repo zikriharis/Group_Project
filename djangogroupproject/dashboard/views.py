@@ -66,10 +66,10 @@ def get_donor_dashboard_data(user):
         })
     monthly_donations.reverse()
     
-    # Get favorite categories
-    category_donations = donations.values('campaign__category').annotate(
+    # Get favorite tags from donations
+    tag_donations = donations.values('campaign__tags__name').annotate(
         total=Sum('amount')
-    ).order_by('-total')[:5]
+    ).order_by('-total').exclude(campaign__tags__name__isnull=True)[:5]
     
     return {
         'total_donated': total_donated,
@@ -78,7 +78,7 @@ def get_donor_dashboard_data(user):
         'bookmarks': bookmarks,
         'recommended_campaigns': recommended_campaigns,
         'monthly_donations': json.dumps(monthly_donations),
-        'category_donations': json.dumps(list(category_donations)),
+        'tag_donations': json.dumps(list(tag_donations)),
         'dashboard_type': 'donor'
     }
     

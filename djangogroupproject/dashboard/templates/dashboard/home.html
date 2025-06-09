@@ -206,10 +206,10 @@
             </div>
             <div class="chart-card">
                 <div class="card-header">
-                    <h3><i class="fas fa-chart-pie"></i> Donation by Category</h3>
+                    <h3><i class="fas fa-tags"></i> Donations by Tag</h3>
                 </div>
                 <div class="card-body">
-                    <canvas id="categoryChart" width="400" height="200"></canvas>
+                    <canvas id="tagChart" width="400" height="200"></canvas>
                 </div>
             </div>
         </div>
@@ -519,16 +519,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Category Distribution Chart
-    const categoryData = {{ category_donations|safe }};
-    if (categoryData && categoryData.length > 0) {
-        const ctx2 = document.getElementById('categoryChart').getContext('2d');
-        window.dashboardCharts.categoryChart = new Chart(ctx2, {
+    // Tag Distribution Chart
+    const tagData = {{ tag_donations|safe }};
+    if (tagData && tagData.length > 0) {
+        const ctx2 = document.getElementById('tagChart').getContext('2d');
+        window.dashboardCharts.tagChart = new Chart(ctx2, {
             type: 'doughnut',
             data: {
-                labels: categoryData.map(d => d.campaign__category || 'Other'),
+                labels: tagData.map(d => d.campaign__tags__name || 'Other'),
                 datasets: [{
-                    data: categoryData.map(d => d.total),
+                    data: tagData.map(d => d.total),
                     backgroundColor: [
                         '#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe'
                     ],
@@ -544,6 +544,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         labels: {
                             padding: 20,
                             usePointStyle: true
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Donations by Tag',
+                        font: {
+                            size: 16
                         }
                     }
                 }

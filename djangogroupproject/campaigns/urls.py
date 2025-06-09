@@ -5,5 +5,6 @@ app_name = 'campaigns'
 
 urlpatterns = [
     path('', views.campaign_list, name='list'),
+    path('create/', views.campaign_create, name='create'),
     path('<uuid:campaign_id>/', views.campaign_detail, name='detail'),
 ]

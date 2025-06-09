@@ -15,13 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from main_landing_pages.views import greeting
+from django.conf import settings
+from django.conf.urls.static import static
+from main_landing_pages.views import LandingPageView, user_login, user_register
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", greeting),
-    path("campaigns/", include("campaigns.urls")),
-    path("dashboard/", include("dashboard.urls")),
-    path("users/", include("users.urls")),
-    # path("organizations/", include("organizations.urls")),
-    path("donations/", include("donations.urls")),
+    path('admin/', admin.site.urls),
+    path('', LandingPageView.as_view(), name='landing'),
+    path('login/', user_login, name='user_login'),
+    path('register/', user_register, name='user_register'),
+    path('campaigns/', include('campaigns.urls')),
+    path('dashboard/', include('dashboard.urls')),
+    path('users/', include('users.urls')),
+    path('donations/', include('donations.urls')),
+    # path('organizations/', include('organizations.urls')),
 ]
+
+# Serve media files in development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
