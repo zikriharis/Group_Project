@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Help Topics</h2>
+  <ul>
+    {% for topic in help_topics %}
+      <li><strong>{{ topic.question }}</strong><br>{{ topic.answer }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

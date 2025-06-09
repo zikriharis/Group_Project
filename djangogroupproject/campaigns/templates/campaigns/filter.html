@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Find a Campaign</h2>
+<form method="get" action="{% url 'campaign_list' %}">
+  <label for="tags">Tags:</label>
+  <select name="tags" id="tags" multiple>
+    {% for tag in tags %}
+      <option value="{{ tag.id }}" {% if tag.id in selected_tags %}selected{% endif %}>{{ tag.name }}</option>
+    {% endfor %}
+  </select>
+  <label for="region">Region:</label>
+  <input type="text" name="region" id="region" value="{{ request.GET.region }}">
+  <label for="country">Country:</label>
+  <input type="text" name="country" id="country" value="{{ request.GET.country }}">
+  <label for="organization">Organization:</label>
+  <select name="organization" id="organization">
+    <option value="">--- All ---</option>
+    {% for org in organizations %}
+      <option value="{{ org.id }}" {% if org.id|stringformat:"s" == request.GET.organization %}selected{% endif %}>{{ org.name }}</option>
+    {% endfor %}
+  </select>
+  <label for="type">Type:</label>
+  <select name="type" id="type">
+    <option value="">--- All ---</option>
+    <option value="physical" {% if request.GET.type == "physical" %}selected{% endif %}>Physical Disabilities</option>
+    <option value="mental" {% if request.GET.type == "mental" %}selected{% endif %}>Mental Disabilities</option>
+    <option value="disaster" {% if request.GET.type == "disaster" %}selected{% endif %}>Natural Disaster</option>
+    <option value="medical" {% if request.GET.type == "medical" %}selected{% endif %}>Medical</option>
+    <option value="terminal" {% if request.GET.type == "terminal" %}selected{% endif %}>Terminal Illness</option>
+  </select>
+  <button type="submit">Filter</button>
+</form>
+<ul>
+  {% for campaign in campaigns %}
+    <li>
+      <a href="{% url 'campaign_detail' campaign.slug %}">{{ campaign.title }}</a> -
+      {{ campaign.organization.name }} -
+      {{ campaign.country }}
+    </li>
+  {% empty %}
+    <li>No campaigns found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

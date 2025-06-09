@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Organizations</h2>
+  <!--Opens an unordered list (<ul>), which will contain list items for each organization.-->
+  <ul>
+    {% for organization in organizations %}
+      <!--Creates a list item (<li>).-->
+      <li>
+        <!--Adds a link (<a>) to the organization’s detail page-->
+        <!--Uses the {% url %} tag to dynamically build the URL based on the named URL pattern 'organization_detail'
+        passing the organization.id as an argument. Displays the name of the organization ({{ organization.name }})
+        as the link text.       -->
+        <a href="{% url 'organization_detail' organization.id %}">{{ organization.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

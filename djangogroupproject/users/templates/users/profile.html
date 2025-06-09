@@ -1,0 +1,35 @@
+<!--Tell django to inherit from a base template base.html-->
+{% extends "base.html" %}
+<!--The base.html file includes a {% block content %} placeholder, which this template fills.-->
+<!--This opens a block of content named content.-->
+<!--Everything that follows (until {% end block %}) should go into the "content" block in base.html-->
+{% block content %}
+  <!--  A regular HTML line — this just renders a heading that says "Profile" on the page.-->
+  <!--The content between this block to end block will replace or fill in
+  the corresponding section in the base layout.-->
+  <h2>Profile</h2>
+  <!--  Starts an HTML <form> element with method="post".-->
+  <!--  That means the form will submit data using the HTTP POST method
+  (not visible (secure) in the URL, unlike GET).-->
+  <form method="post">
+    <!--    Adds a Cross Site Request Forgery (CSRF) token.-->
+    <!--    This is a required Django security feature for POST forms.-->
+    <!--    It generates a hidden <input> field with a one-time token to prevent CSRF attacks.-->
+    {% csrf_token %}
+    <!--    Renders the Django form passed to the template (form) as a series of <p> tags.-->
+    <!--    If your form has fields like name, email, bio, this would render:-->
+    <!--    <p>-->
+    <!--      <label for="id_name">Name:</label>-->
+    <!--      <input type="text" name="name" id="id_name">-->
+    <!--    </p>-->
+    <!--    <p>-->
+    <!--      ...-->
+    <!--    </p>-->
+    {{ form.as_p }}
+    <!--    A standard HTML submit button.-->
+    <!--When clicked, the form data will be sent via POST to the same URL.    -->
+    <button type="submit">Update Profile</button>
+  <!--Closes the form element.-->
+  </form>
+<!--Ends the content block that began with {% block content %}-->
+{% endblock %}

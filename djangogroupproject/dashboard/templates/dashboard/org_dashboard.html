@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Organization Dashboard</h2>
+<p>Welcome, {{ user.username }} ({{ user.organization.name }})</p>
+<ul>
+  <li><a href="{% url 'create_campaign' %}">Create Campaign</a></li>
+  <li><a href="{% url 'manage_team' %}">Manage Team</a></li>
+  <li><a href="{% url 'org_reports' %}">Reports & Statistics</a></li>
+  <li><a href="{% url 'org_subscription' %}">Subscription & Payments</a></li>
+  <li><a href="{% url 'org_notifications' %}">Notifications</a></li>
+  <li><a href="{% url 'edit_org_profile' %}">Edit Organization Profile</a></li>
+</ul>
+<h3>Your Campaigns</h3>
+<table>
+  <tr>
+    <th>Title</th><th>Status</th><th>Goal</th><th>Current</th><th>Approval</th><th>Actions</th>
+  </tr>
+  {% for campaign in campaigns %}
+    <tr>
+      <td><a href="{% url 'campaign_detail' campaign.slug %}">{{ campaign.title }}</a></td>
+      <td>{{ campaign.status }}</td>
+      <td>{{ campaign.goal_amount }}</td>
+      <td>{{ campaign.current_amount }}</td>
+      <td>
+        Main: {{ campaign.get_main_status_display }}<br>
+        Page: {{ campaign.get_page_status_display }}
+      </td>
+      <td>
+        <a href="{% url 'edit_campaign' campaign.slug %}">Edit</a> |
+        <a href="{% url 'campaign_report' campaign.slug %}">Report</a>
+      </td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="6">No campaigns found.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

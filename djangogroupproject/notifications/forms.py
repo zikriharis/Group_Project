@@ -1,6 +1,7 @@
 from django import forms
+from .models import Notification
 
-
-class UsersConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'users'
+class NotificationForm(forms.ModelForm):
+    class Meta:
+        model = Notification
+        fields = ('user', 'campaign', 'organization', 'type', 'message')

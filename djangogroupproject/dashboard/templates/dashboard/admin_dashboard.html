@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<ul>
+  <li><a href="{% url 'admin_campaign_requests' %}">Review Campaign Requests</a></li>
+  <li><a href="{% url 'admin_orgs' %}">Manage Organizations</a></li>
+  <li><a href="{% url 'admin_earnings' %}">Earnings & Statistics</a></li>
+  <li><a href="{% url 'admin_roles' %}">Manage Roles & SubAdmins</a></li>
+  <li><a href="{% url 'admin_fraud_reports' %}">Fraud Reports</a></li>
+</ul>
+<h3>Recent Campaign Requests</h3>
+<table>
+  <tr><th>Campaign</th><th>Type</th><th>Status</th><th>Action</th></tr>
+  {% for request in recent_requests %}
+    <tr>
+      <td>{{ request.campaign.title }}</td>
+      <td>{{ request.request_type }}</td>
+      <td>{{ request.status }}</td>
+      <td><a href="{% url 'admin_review_campaign' request.id %}">Review</a></td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="4">No requests found.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

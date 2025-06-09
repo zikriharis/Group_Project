@@ -1,0 +1,19 @@
+<!--The base file typically contains shared layout elements like headers, footers, and navigation bars.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Charity Platform</title>
+</head>
+<body>
+  <nav>
+    <a href="{% url 'campaign_list' %}">Home</a>
+    <a href="{% url 'organization_list' %}">Organizations</a>
+    <a href="{% url 'register' %}">Register</a>
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'profile' %}">Profile</a>
+    <!-- Add more as needed -->
+  </nav>
+  <hr>
+  {% block content %}{% endblock %}
+</body>
+</html>

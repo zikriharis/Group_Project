@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import Notification
 
-# Create your views here.
+def notification_list(request):
+    notifications = Notification.objects.filter(user=request.user)
+    return render(request, 'notifications/list.html', {'notifications': notifications})

@@ -1,6 +1,7 @@
 from django import forms
+from .models import CampaignSubscription
 
-
-class UsersConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'users'
+class CampaignSubscriptionForm(forms.ModelForm):
+    class Meta:
+        model = CampaignSubscription
+        fields = ('campaign', 'organization', 'payment_proof')

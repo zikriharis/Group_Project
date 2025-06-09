@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import CampaignSubscription
 
-# Register your models here.
+#NEED TO ADD START AND END DATE
+@admin.register(CampaignSubscription)
+class CampaignSubscriptionAdmin(admin.ModelAdmin):
+    list_display = ('campaign', 'organization', 'status', 'created_at', 'updated_at')

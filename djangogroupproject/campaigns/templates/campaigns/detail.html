@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %} <!--Everything inside this block will be rendered in place of {% block content %} in base.html.-->
+  <h2>{{ campaign.title }}</h2> <!-- -->
+  <img src="{{ campaign.main_image.url }}" alt="{{ campaign.title }}"> <!-- Displays the main image of the campaign.
+  .url gets the URL of the uploaded image file. alt provides alternate text using the campaign’s title.-->
+  <p>{{ campaign.brief_description }}</p>
+  <p>Status: {{ campaign.status }}</p>
+  <p>Current: {{ campaign.current_amount }} / {{ campaign.goal_amount }} {{ campaign.currency_campaign }}</p>
+  <!-- {% url %} uses the organization_detail route and passes the organization’s ID.-->
+  <p>Organization: <a href="{% url 'organization_detail' campaign.organization.id %}">{{ campaign.organization.name }}</a></p>
+  <p>Country: {{ campaign.country }}</p>
+  <p>Start: {{ campaign.start_date }} End: {{ campaign.end_date }}</p>
+  <p>External Link: <a href="{{ campaign.external_link }}">{{ campaign.external_link }}</a></p>
+  <p>Likes: {{ likes }}</p>
+  <h3>Media & Text Blocks</h3>
+  <ul>
+    {% for block in blocks %}
+      <li>
+        {% if block.block_type == 'text' %}
+          <p>{{ block.text_content }}</p>
+        {% elif block.block_type == 'image' %}
+          <img src="{{ block.media_file.url }}">
+        {% elif block.block_type == 'video' %}
+          <video src="{{ block.media_file.url }}" controls></video>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  <h3>Documents</h3>
+  <ul>
+    {% for doc in documents %} <!--need to remove this, only for admin use -->
+      <li><a href="{{ doc.document.url }}">{{ doc.description }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'fraud_report' campaign.id %}">Report Fraud</a>
+{% endblock %}

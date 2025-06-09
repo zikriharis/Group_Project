@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Campaign Manager Dashboard</h2>
+<ul>
+  <li><a href="{% url 'manager_notifications' %}">Notifications</a></li>
+</ul>
+<h3>Assigned Campaigns</h3>
+<table>
+  <tr>
+    <th>Title</th><th>Status</th><th>Goal</th><th>Current</th><th>Actions</th>
+  </tr>
+  {% for campaign in campaigns %}
+    <tr>
+      <td><a href="{% url 'campaign_detail' campaign.slug %}">{{ campaign.title }}</a></td>
+      <td>{{ campaign.status }}</td>
+      <td>{{ campaign.goal_amount }}</td>
+      <td>{{ campaign.current_amount }}</td>
+      <td>
+        <a href="{% url 'edit_campaign' campaign.slug %}">Edit</a> |
+        <a href="{% url 'campaign_report' campaign.slug %}">Report</a>
+      </td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="5">No campaigns assigned.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}
