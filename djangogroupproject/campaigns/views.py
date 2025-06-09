@@ -62,9 +62,17 @@ def campaign_detail(request, campaign_id):
     return render(request, "campaigns/detail.html", context)
 
 
+from django.contrib import messages # Ensure messages is imported
+from django.shortcuts import redirect # Ensure redirect is imported
+
 @login_required
 def campaign_create(request):
     """Handle creation of a new campaign"""
+    allowed_roles = ['organization', 'manager', 'admin']
+    if request.user.role not in allowed_roles:
+        messages.error(request, "You are not authorized to create campaigns. Please contact support if you believe this is an error.")
+        return redirect('dashboard:home')
+
     if request.method == 'POST':
         form = CampaignForm(request.POST, request.FILES)
         if form.is_valid():

@@ -1,0 +1,214 @@
+[
+  {
+    "model": "users.user",
+    "pk": "a0000000-0000-0000-0000-000000000001",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "admin1",
+      "first_name": "Admin",
+      "last_name": "UserOne",
+      "email": "admin1@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "admin",
+      "organization": null
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "a0000000-0000-0000-0000-000000000002",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "last_login": null,
+      "is_superuser": true,
+      "username": "admin2",
+      "first_name": "Admin",
+      "last_name": "UserTwo",
+      "email": "admin2@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "admin",
+      "organization": null
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "d0000000-0000-0000-0000-000000000001",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "donor1",
+      "first_name": "Donna",
+      "last_name": "One",
+      "email": "donor1@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "donor",
+      "organization": null
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "d0000000-0000-0000-0000-000000000002",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "donor2",
+      "first_name": "David",
+      "last_name": "Two",
+      "email": "donor2@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "donor",
+      "organization": null
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "d0000000-0000-0000-0000-000000000003",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "donor3",
+      "first_name": "Diana",
+      "last_name": "Three",
+      "email": "donor3@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "donor",
+      "organization": null
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "d0000000-0000-0000-0000-000000000004",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "donor4",
+      "first_name": "Derek",
+      "last_name": "Four",
+      "email": "donor4@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "donor",
+      "organization": null
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "d0000000-0000-0000-0000-000000000005",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "donor5",
+      "first_name": "Daphne",
+      "last_name": "Five",
+      "email": "donor5@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "donor",
+      "organization": null
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "o0000000-0000-0000-0000-000000000001",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "orgowner_verified1",
+      "first_name": "Olivia",
+      "last_name": "OwnerOne",
+      "email": "orgowner1@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "organization",
+      "organization": "org00000-0000-0000-0000-verified0001" 
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "o0000000-0000-0000-0000-000000000002",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "orgmember_verified1",
+      "first_name": "Mike",
+      "last_name": "MemberOne",
+      "email": "orgmember1@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "manager",
+      "organization": "org00000-0000-0000-0000-verified0001" 
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "o0000000-0000-0000-0000-000000000003",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "orgowner_verified2",
+      "first_name": "Oscar",
+      "last_name": "OwnerTwo",
+      "email": "orgowner2@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "organization",
+      "organization": "org00000-0000-0000-0000-verified0002" 
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "o0000000-0000-0000-0000-000000000004",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "orgmember_verified2",
+      "first_name": "Martha",
+      "last_name": "MemberTwo",
+      "email": "orgmember2@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "manager",
+      "organization": "org00000-0000-0000-0000-verified0002" 
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "o0000000-0000-0000-0000-000000000005",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "orgowner_pending",
+      "first_name": "Penny",
+      "last_name": "Pending",
+      "email": "pending@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "organization", 
+      "organization": "org00000-0000-0000-0000-pending0003"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": "o0000000-0000-0000-0000-000000000006",
+    "fields": {
+      "password": "pbkdf2_sha256$720000$somesalt$gqN9GvTq01vMvVpLh7yK9nO7ZzQzYxWkCjVnRgUuP4A=",
+      "username": "orgowner_rejected",
+      "first_name": "Reggie",
+      "last_name": "Rejected",
+      "email": "rejected@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-01-01T00:00:00Z",
+      "role": "organization",
+      "organization": "org00000-0000-0000-0000-rejected004"
+    }
+  }
+]

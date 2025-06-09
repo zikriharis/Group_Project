@@ -1,0 +1,71 @@
+[
+  {
+    "model": "campaigns.campaign",
+    "pk": "camp0000-0000-0000-0000-active000001",
+    "fields": {
+      "title": "Solar Power for Rural Schools",
+      "description": "Help us bring clean and reliable solar energy to 10 rural schools, empowering education for over 2000 students. This project will provide lighting, power for computers, and improve overall learning conditions.",
+      "goal_amount": "25000.00",
+      "current_amount": "12500.00",
+      "start_date": "2024-02-01T00:00:00Z",
+      "end_date": "2024-08-01T00:00:00Z",
+      "status": "active",
+      "organization": "org00000-0000-0000-0000-verified0001",
+      "created_by": "o0000000-0000-0000-0000-000000000001",
+      "created_at": "2024-01-25T10:00:00Z",
+      "updated_at": "2024-02-01T11:00:00Z",
+      "cover_image": "campaign_covers/solar_schools.jpg",
+      "is_featured": true,
+      "admin_approval_status": "approved",
+      "admin_remarks": "Great initiative, approved for launch.",
+      "admin_approved_by": "a0000000-0000-0000-0000-000000000001",
+      "admin_approved_at": "2024-01-30T14:00:00Z"
+    }
+  },
+  {
+    "model": "campaigns.campaign",
+    "pk": "camp0000-0000-0000-0000-active000002",
+    "fields": {
+      "title": "Youth Coding Bootcamp Scholarships",
+      "description": "Support aspiring young developers from underprivileged backgrounds by funding scholarships for an intensive 12-week coding bootcamp. Your contribution can change a life and foster tech talent.",
+      "goal_amount": "15000.00",
+      "current_amount": "7500.00",
+      "start_date": "2024-03-01T00:00:00Z",
+      "end_date": "2024-09-01T00:00:00Z",
+      "status": "active",
+      "organization": "org00000-0000-0000-0000-verified0002",
+      "created_by": "o0000000-0000-0000-0000-000000000003",
+      "created_at": "2024-02-15T09:30:00Z",
+      "updated_at": "2024-02-20T10:00:00Z",
+      "cover_image": "campaign_covers/coding_bootcamp.jpg",
+      "is_featured": false,
+      "admin_approval_status": "approved",
+      "admin_remarks": "Well-defined project, approved.",
+      "admin_approved_by": "a0000000-0000-0000-0000-000000000002",
+      "admin_approved_at": "2024-02-25T16:00:00Z"
+    }
+  },
+  {
+    "model": "campaigns.campaign",
+    "pk": "camp0000-0000-0000-0000-pending0003",
+    "fields": {
+      "title": "Urban Community Garden Project",
+      "description": "Transform a neglected urban space into a vibrant community garden. This project will provide fresh produce, green space, and educational opportunities for local residents.",
+      "goal_amount": "10000.00",
+      "current_amount": "0.00",
+      "start_date": "2024-04-01T00:00:00Z",
+      "end_date": "2024-10-01T00:00:00Z",
+      "status": "pending_approval", 
+      "organization": "org00000-0000-0000-0000-verified0001",
+      "created_by": "o0000000-0000-0000-0000-000000000002", 
+      "created_at": "2024-03-10T11:00:00Z",
+      "updated_at": "2024-03-10T11:00:00Z",
+      "cover_image": "campaign_covers/community_garden.jpg",
+      "is_featured": false,
+      "admin_approval_status": "pending",
+      "admin_remarks": null,
+      "admin_approved_by": null,
+      "admin_approved_at": null
+    }
+  }
+]

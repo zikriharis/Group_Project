@@ -1,7 +1,7 @@
 import uuid
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from organizations.models import Organization
 
 # Create your models here.
 class User(AbstractUser):
@@ -15,6 +15,7 @@ class User(AbstractUser):
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
     country = models.CharField(max_length=50, blank=True, null=True)
     avatar = models.ImageField(upload_to="avatars/", blank=True, null=True)
+    organization = models.ForeignKey(Organization, on_delete=models.SET_NULL, null=True, blank=True, related_name='team_members', help_text='The organization this user belongs to, if any.')
 
     # ADD these two lines to fix the reverse accessor clash
     groups = models.ManyToManyField(

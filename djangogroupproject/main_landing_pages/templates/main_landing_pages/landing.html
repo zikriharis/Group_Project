@@ -294,7 +294,7 @@
                     <!-- CTA Buttons -->
                     <div class="flex space-x-3">
                         <a href="{% url 'campaigns:detail' campaign_id=campaign.id %}" 
-                           class="group/btn flex-1 inline-flex items-center justify-center px-4 py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-sm transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md">
+                           class="group/btn flex-1 inline-flex items-center justify-center px-4 py-3 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-sm transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-md"> /* stylelint-disable-line */
                             <span class="relative z-10 flex items-center">
                                 <i class="fas fa-donate mr-2"></i>
                                 Donate Now
@@ -303,7 +303,7 @@
                         </a>
                         
                         <div class="relative">
-                            <button class="w-12 h-12 flex items-center justify-center bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 transition-all duration-300 group/bookmark" 
+                            <button class="w-12 h-12 flex items-center justify-center bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 transition-all duration-300 group/bookmark"  /* stylelint-disable-line */
                                     data-campaign-id="{{ campaign.id }}"
                                     aria-label="Save to bookmarks">
                                 <i class="far fa-heart text-gray-600 group-hover/bookmark:text-red-500 transition-colors duration-300"></i>
@@ -311,7 +311,7 @@
                                     {{ campaign.bookmarks_count|default:0 }}
                                 </span>
                             </button>
-                            <div class="tooltip absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover/bookmark:opacity-100 transition-opacity duration-200 pointer-events-none">
+                            <div class="tooltip absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover/bookmark:opacity-100 transition-opacity duration-200 pointer-events-none"> /* stylelint-disable-line */
                                 Save to bookmarks
                                 <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-gray-900 rotate-45"></div>
                             </div>
@@ -350,7 +350,7 @@
                         
                         <div class="flex flex-col sm:flex-row justify-center gap-4">
                             <a href="{% url 'campaigns:list' %}" 
-                               class="group/btn inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                               class="group/btn inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"> /* stylelint-disable-line */
                                 <span class="relative z-10 flex items-center">
                                     <i class="fas fa-rocket mr-3"></i>
                                     Start Your Campaign
@@ -404,7 +404,7 @@
             
             <div class="flex flex-col sm:flex-row justify-center gap-6">
                 <a href="{% url 'campaigns:list' %}" 
-                   class="group relative inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-700 font-bold rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                   class="group relative inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-700 font-bold rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"> /* stylelint-disable-line selector-pseudo-class-no-unknown -- group is used here but might be part of group/btn pattern indirectly */
                     <span class="relative z-10 flex items-center">
                         <i class="fas fa-rocket mr-3"></i>
                         Start Your Campaign

@@ -1,0 +1,78 @@
+[
+  {
+    "model": "organizations.organization",
+    "pk": "org00000-0000-0000-0000-verified0001",
+    "fields": {
+      "name": "GreenTech Innovations",
+      "description": "Dedicated to developing and promoting sustainable technology solutions for a greener future. We focus on renewable energy, waste reduction, and eco-friendly manufacturing processes.",
+      "contact_email": "contact@greentechinnovations.com",
+      "website_url": "https://greentechinnovations.com",
+      "address": "123 Eco Park, Sustainability City, SC 12345",
+      "registration_document": "documents/green_tech_reg.pdf",
+      "verification_status": "verified",
+      "owner": "o0000000-0000-0000-0000-000000000001",
+      "created_at": "2024-01-05T10:00:00Z",
+      "updated_at": "2024-01-10T11:00:00Z",
+      "admin_remarks": "Application looks solid. Verified.",
+      "reviewed_by": "a0000000-0000-0000-0000-000000000001",
+      "reviewed_at": "2024-01-10T11:00:00Z"
+    }
+  },
+  {
+    "model": "organizations.organization",
+    "pk": "org00000-0000-0000-0000-verified0002",
+    "fields": {
+      "name": "Community Builders United",
+      "description": "A non-profit organization focused on empowering local communities through education, skill development, and infrastructure projects. We believe in building from the ground up.",
+      "contact_email": "info@communitybuilders.org",
+      "website_url": "https://communitybuilders.org",
+      "address": "456 Unity Plaza, Hope Town, HT 67890",
+      "registration_document": "documents/community_builders_reg.pdf",
+      "verification_status": "verified",
+      "owner": "o0000000-0000-0000-0000-000000000003",
+      "created_at": "2024-01-15T14:30:00Z",
+      "updated_at": "2024-01-20T15:00:00Z",
+      "admin_remarks": "All documents in order. Approved.",
+      "reviewed_by": "a0000000-0000-0000-0000-000000000002",
+      "reviewed_at": "2024-01-20T15:00:00Z"
+    }
+  },
+  {
+    "model": "organizations.organization",
+    "pk": "org00000-0000-0000-0000-pending0003",
+    "fields": {
+      "name": "Future Artists Collective",
+      "description": "An emerging collective supporting up-and-coming artists by providing studio space, exhibition opportunities, and mentorship programs.",
+      "contact_email": "submit@futureartistscollective.art",
+      "website_url": "https://futureartistscollective.art",
+      "address": "789 Creative Lane, Artville, AV 54321",
+      "registration_document": "documents/future_artists_reg.pdf",
+      "verification_status": "pending",
+      "owner": "o0000000-0000-0000-0000-000000000005",
+      "created_at": "2024-02-01T09:00:00Z",
+      "updated_at": "2024-02-01T09:00:00Z",
+      "admin_remarks": null,
+      "reviewed_by": null,
+      "reviewed_at": null
+    }
+  },
+  {
+    "model": "organizations.organization",
+    "pk": "org00000-0000-0000-0000-rejected004",
+    "fields": {
+      "name": "Quick Gains Ltd.",
+      "description": "A new venture aiming for rapid market expansion. Details are a bit vague.",
+      "contact_email": "ceo@quickgains.biz",
+      "website_url": "https://quickgains.biz",
+      "address": "101 Profit Street, Speculation City, SC 98765",
+      "registration_document": "documents/quick_gains_reg.docx",
+      "verification_status": "declined",
+      "owner": "o0000000-0000-0000-0000-000000000006",
+      "created_at": "2024-02-10T16:00:00Z",
+      "updated_at": "2024-02-12T17:00:00Z",
+      "admin_remarks": "Incomplete documentation and unclear mission. Application declined.",
+      "reviewed_by": "a0000000-0000-0000-0000-000000000001",
+      "reviewed_at": "2024-02-12T17:00:00Z"
+    }
+  }
+]

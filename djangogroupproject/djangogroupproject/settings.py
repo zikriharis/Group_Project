@@ -25,7 +25,8 @@ SECRET_KEY = "django-insecure-k1bp^!g#o@x&m&^ev56426^lw$a9*eqb=)^y(+=fpa^j^-t(r^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000']
 
 
 # Application definition
@@ -145,8 +146,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Authentication
 AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = 'dashboard:home'
-LOGOUT_REDIRECT_URL = 'landing'
-LOGIN_URL = 'user_login'
+LOGOUT_REDIRECT_URL = 'main_landing_pages:landing'
+LOGIN_URL = 'users:login'
 
 # Email settings (console backend for development)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
