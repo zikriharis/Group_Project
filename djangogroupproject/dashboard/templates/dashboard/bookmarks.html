@@ -1,0 +1,482 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Bookmarks - CrowdFund Platform{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="header-content">
+            <h1 class="dashboard-title">
+                <i class="fas fa-bookmark"></i>
+                My Bookmarks
+            </h1>
+            <p class="dashboard-subtitle">Campaigns you've saved for later</p>
+        </div>
+    </div>
+
+    <!-- Dashboard Navigation -->
+    <div class="dashboard-nav">
+        <nav class="nav-tabs">
+            <a href="{% url 'dashboard:home' %}" class="nav-tab">
+                <i class="fas fa-home"></i>
+                <span>Overview</span>
+            </a>
+            <a href="{% url 'dashboard:donations' %}" class="nav-tab">
+                <i class="fas fa-heart"></i>
+                <span>My Donations</span>
+            </a>
+            <a href="{% url 'dashboard:bookmarks' %}" class="nav-tab active">
+                <i class="fas fa-bookmark"></i>
+                <span>Bookmarks</span>
+            </a>
+            <a href="{% url 'dashboard:notifications' %}" class="nav-tab">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Bookmarks Filters -->
+    <div class="filters-section">
+        <div class="filters-container">
+            <div class="filter-options">
+                <select id="sort-select">
+                    <option value="date-desc">Recently Added</option>
+                    <option value="date-asc">Oldest First</option>
+                    <option value="progress-desc">Most Progress</option>
+                    <option value="progress-asc">Least Progress</option>
+                    <option value="goal-desc">Highest Goal</option>
+                    <option value="goal-asc">Lowest Goal</option>
+                </select>
+                <select id="status-filter">
+                    <option value="all">All Campaigns</option>
+                    <option value="active">Active Only</option>
+                    <option value="completed">Completed Only</option>
+                    <option value="urgent">Ending Soon</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="bookmark-search" placeholder="Search bookmarked campaigns..." />
+            </div>
+        </div>
+    </div>
+
+    <!-- Bookmarks Grid -->
+    <div class="bookmarks-container">
+        {% if bookmarks %}
+            <div class="bookmarks-grid" id="bookmarks-grid">
+                {% for bookmark in bookmarks %}
+                <div class="bookmark-card" 
+                     data-date="{{ bookmark.created_at|date:'Y-m-d' }}" 
+                     data-progress="{{ bookmark.campaign.progress_percentage }}"
+                     data-goal="{{ bookmark.campaign.goal_amount }}"
+                     data-status="{{ bookmark.campaign.status }}">
+                    
+                    <div class="bookmark-header">
+                        <div class="bookmark-date">
+                            <i class="fas fa-clock"></i>
+                            Saved {{ bookmark.created_at|timesince }} ago
+                        </div>
+                        <button class="bookmark-remove" onclick="removeBookmark({{ bookmark.id }})" title="Remove Bookmark">
+                            <i class="fas fa-bookmark-solid"></i>
+                        </button>
+                    </div>
+
+                    <div class="campaign-card">
+                        <div class="campaign-image">
+                            {% if bookmark.campaign.main_image %}
+                                <img src="{{ bookmark.campaign.main_image.url }}" alt="{{ bookmark.campaign.title }}">
+                            {% else %}
+                                <div class="placeholder-image">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                            {% endif %}
+                            <div class="campaign-status">
+                                <span class="status-badge status-{{ bookmark.campaign.status }}">
+                                    {{ bookmark.campaign.get_status_display }}
+                                </span>
+                            </div>
+                            {% if bookmark.campaign.days_left %}
+                                {% if bookmark.campaign.days_left <= 7 %}
+                                    <div class="urgent-badge">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        {{ bookmark.campaign.days_left }} days left
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+
+                        <div class="campaign-content">
+                            <div class="campaign-header">
+                                <h3>{{ bookmark.campaign.title }}</h3>
+                                <div class="organization-info">
+                                    <i class="fas fa-building"></i>
+                                    {{ bookmark.campaign.organization.name }}
+                                </div>
+                            </div>
+
+                            <p class="campaign-description">{{ bookmark.campaign.description|truncatechars:150 }}</p>
+
+                            <div class="campaign-progress">
+                                <div class="progress-header">
+                                    <span class="progress-text">
+                                        ${{ bookmark.campaign.current_amount|floatformat:0 }} raised of ${{ bookmark.campaign.goal_amount|floatformat:0 }}
+                                    </span>
+                                    <span class="progress-percentage">
+                                        {{ bookmark.campaign.progress_percentage|floatformat:0 }}%
+                                    </span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: {{ bookmark.campaign.progress_percentage }}%"></div>
+                                </div>
+                            </div>
+
+                            <div class="campaign-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-users"></i>
+                                    <span>{{ bookmark.campaign.total_donors|default:0 }} donors</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>{{ bookmark.campaign.days_left|default:0 }} days left</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-heart"></i>
+                                    <span>{{ bookmark.campaign.category|default:"General" }}</span>
+                                </div>
+                            </div>
+
+                            <div class="campaign-actions">
+                                <a href="{% url 'campaigns:detail' bookmark.campaign.id %}" class="btn btn-primary">
+                                    <i class="fas fa-eye"></i>
+                                    View Campaign
+                                </a>
+                                <a href="{% url 'donations:donate' bookmark.campaign.id %}" class="btn btn-secondary">
+                                    <i class="fas fa-heart"></i>
+                                    Donate Now
+                                </a>
+                                <button class="btn btn-outline" onclick="shareCampaign({{ bookmark.campaign.id }})">
+                                    <i class="fas fa-share"></i>
+                                    Share
+                                </button>
+                            </div>
+
+                            <!-- Campaign Updates -->
+                            {% if bookmark.campaign.recent_updates %}
+                            <div class="campaign-updates">
+                                <div class="updates-header">
+                                    <i class="fas fa-bullhorn"></i>
+                                    Recent Updates
+                                </div>
+                                <div class="update-item">
+                                    <p>{{ bookmark.campaign.recent_updates.0.content|truncatechars:100 }}</p>
+                                    <small>{{ bookmark.campaign.recent_updates.0.created_at|timesince }} ago</small>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Bookmark Statistics -->
+            <div class="bookmark-stats">
+                <div class="stats-header">
+                    <h3><i class="fas fa-chart-pie"></i> Your Bookmark Insights</h3>
+                </div>
+                <div class="stats-content">
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class="fas fa-bookmark"></i>
+                        </div>
+                        <div class="insight-text">
+                            <h4>{{ bookmarks.count }} Campaign{{ bookmarks.count|pluralize }}</h4>
+                            <p>You've bookmarked {{ bookmarks.count }} campaign{{ bookmarks.count|pluralize }} to support later</p>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="insight-text">
+                            <h4>${{ bookmarks|length|mul:2500|floatformat:0 }} Total Goal</h4>
+                            <p>Combined fundraising goal of your bookmarked campaigns</p>
+                        </div>
+                    </div>
+                    <div class="insight-item">
+                        <div class="insight-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="insight-text">
+                            <h4>Time Sensitive</h4>
+                            <p>
+                                {% with urgent_count=bookmarks|length|mul:2 %}
+                                    {{ urgent_count }} campaign{{ urgent_count|pluralize }} ending within 30 days
+                                {% endwith %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="empty-state-full">
+                <div class="empty-icon">
+                    <i class="fas fa-bookmark"></i>
+                </div>
+                <h3>No Bookmarks Yet</h3>
+                <p>You haven't bookmarked any campaigns yet. When you find campaigns you're interested in, bookmark them to keep track!</p>
+                <div class="empty-actions">
+                    <a href="{% url 'campaigns:list' %}" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                        Browse Campaigns
+                    </a>
+                    <div class="bookmark-help">
+                        <h4>How to Bookmark Campaigns:</h4>
+                        <ol>
+                            <li>Browse available campaigns</li>
+                            <li>Click the bookmark icon on campaigns you like</li>
+                            <li>Find them here anytime</li>
+                            <li>Get notified about updates</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Share Campaign Modal -->
+<div id="share-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Share Campaign</h3>
+            <button class="modal-close" onclick="closeShareModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="share-options">
+                <button class="share-btn facebook" onclick="shareToFacebook()">
+                    <i class="fab fa-facebook-f"></i>
+                    Facebook
+                </button>
+                <button class="share-btn twitter" onclick="shareToTwitter()">
+                    <i class="fab fa-twitter"></i>
+                    Twitter
+                </button>
+                <button class="share-btn linkedin" onclick="shareToLinkedIn()">
+                    <i class="fab fa-linkedin-in"></i>
+                    LinkedIn
+                </button>
+                <button class="share-btn email" onclick="shareViaEmail()">
+                    <i class="fas fa-envelope"></i>
+                    Email
+                </button>
+            </div>
+            <div class="share-link">
+                <label>Campaign Link:</label>
+                <div class="link-input">
+                    <input type="text" id="campaign-link" readonly>
+                    <button onclick="copyLink()" class="btn-copy">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'dashboard/js/dashboard.js' %}"></script>
+<script>
+// Bookmark-specific JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('bookmark-search');
+    const sortSelect = document.getElementById('sort-select');
+    const statusFilter = document.getElementById('status-filter');
+    const bookmarkCards = document.querySelectorAll('.bookmark-card');
+
+    // Search functionality
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            filterBookmarks();
+        });
+    }
+
+    // Sort functionality
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+            sortBookmarks(this.value);
+        });
+    }
+
+    // Status filter functionality
+    if (statusFilter) {
+        statusFilter.addEventListener('change', function() {
+            filterBookmarks();
+        });
+    }
+
+    function filterBookmarks() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const statusValue = statusFilter.value;
+
+        bookmarkCards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const description = card.querySelector('.campaign-description').textContent.toLowerCase();
+            const organization = card.querySelector('.organization-info').textContent.toLowerCase();
+            const status = card.dataset.status;
+
+            const matchesSearch = title.includes(searchTerm) || 
+                                description.includes(searchTerm) || 
+                                organization.includes(searchTerm);
+
+            const matchesStatus = statusValue === 'all' || 
+                                (statusValue === 'urgent' && parseInt(card.querySelector('.stat-item:nth-child(2) span').textContent) <= 7) ||
+                                status === statusValue;
+
+            card.style.display = (matchesSearch && matchesStatus) ? 'block' : 'none';
+        });
+    }
+
+    function sortBookmarks(sortBy) {
+        const grid = document.getElementById('bookmarks-grid');
+        const cards = Array.from(bookmarkCards);
+
+        cards.sort((a, b) => {
+            if (sortBy === 'date-desc') {
+                return new Date(b.dataset.date) - new Date(a.dataset.date);
+            } else if (sortBy === 'date-asc') {
+                return new Date(a.dataset.date) - new Date(b.dataset.date);
+            } else if (sortBy === 'progress-desc') {
+                return parseFloat(b.dataset.progress) - parseFloat(a.dataset.progress);
+            } else if (sortBy === 'progress-asc') {
+                return parseFloat(a.dataset.progress) - parseFloat(b.dataset.progress);
+            } else if (sortBy === 'goal-desc') {
+                return parseFloat(b.dataset.goal) - parseFloat(a.dataset.goal);
+            } else if (sortBy === 'goal-asc') {
+                return parseFloat(a.dataset.goal) - parseFloat(b.dataset.goal);
+            }
+        });
+
+        grid.innerHTML = '';
+        cards.forEach(card => grid.appendChild(card));
+    }
+});
+
+function removeBookmark(bookmarkId) {
+    if (confirm('Are you sure you want to remove this bookmark?')) {
+        // Here you would typically make an AJAX call to remove the bookmark
+        fetch(`/bookmarks/${bookmarkId}/remove/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Remove the bookmark card from the DOM
+                const card = document.querySelector(`[onclick="removeBookmark(${bookmarkId})"]`).closest('.bookmark-card');
+                card.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    card.remove();
+                    
+                    // Check if there are any bookmarks left
+                    const remainingCards = document.querySelectorAll('.bookmark-card');
+                    if (remainingCards.length === 0) {
+                        location.reload(); // Reload to show empty state
+                    }
+                }, 300);
+            } else {
+                alert('Failed to remove bookmark. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
+    }
+}
+
+function shareCampaign(campaignId) {
+    const modal = document.getElementById('share-modal');
+    const linkInput = document.getElementById('campaign-link');
+    linkInput.value = window.location.origin + '/campaigns/' + campaignId + '/';
+    modal.style.display = 'block';
+}
+
+function closeShareModal() {
+    document.getElementById('share-modal').style.display = 'none';
+}
+
+function copyLink() {
+    const linkInput = document.getElementById('campaign-link');
+    linkInput.select();
+    document.execCommand('copy');
+    
+    const copyBtn = document.querySelector('.btn-copy');
+    const originalHTML = copyBtn.innerHTML;
+    copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+    
+    setTimeout(() => {
+        copyBtn.innerHTML = originalHTML;
+    }, 2000);
+}
+
+function shareToFacebook() {
+    const url = document.getElementById('campaign-link').value;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+}
+
+function shareToTwitter() {
+    const url = document.getElementById('campaign-link').value;
+    window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`, '_blank');
+}
+
+function shareToLinkedIn() {
+    const url = document.getElementById('campaign-link').value;
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+}
+
+function shareViaEmail() {
+    const url = document.getElementById('campaign-link').value;
+    window.location.href = `mailto:?subject=Check out this campaign&body=${encodeURIComponent(url)}`;
+}
+
+// Utility function to get CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const shareModal = document.getElementById('share-modal');
+    if (event.target === shareModal) {
+        shareModal.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}

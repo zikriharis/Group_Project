@@ -1,0 +1,563 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profile - CrowdFund{% endblock %}
+
+{% block extra_css %}
+<style>
+    .profile-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 3rem 2rem;
+        color: white;
+        margin-bottom: 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .profile-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+        animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        font-size: 3rem;
+        font-weight: bold;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        position: relative;
+        z-index: 1;
+    }
+
+    .profile-name {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .profile-role {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        text-transform: capitalize;
+        position: relative;
+        z-index: 1;
+    }
+
+    .profile-content {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .profile-sidebar {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        height: fit-content;
+    }
+
+    .profile-main {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-section {
+        margin-bottom: 2rem;
+    }
+
+    .sidebar-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f7fafc;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #4a5568;
+    }
+
+    .info-value {
+        color: #2d3748;
+        text-align: right;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .btn-edit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .tabs-container {
+        margin-bottom: 2rem;
+    }
+
+    .tabs-nav {
+        display: flex;
+        border-bottom: 2px solid #e2e8f0;
+        margin-bottom: 2rem;
+    }
+
+    .tab-button {
+        background: none;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #718096;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+    }
+
+    .tab-button.active {
+        color: #667eea;
+        border-bottom-color: #667eea;
+    }
+
+    .tab-button:hover {
+        color: #667eea;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        border-radius: 15px;
+        padding: 1.5rem;
+        text-align: center;
+        border-left: 4px solid #667eea;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        color: #718096;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+
+    .activity-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        background: #f7fafc;
+        transition: all 0.3s ease;
+    }
+
+    .activity-item:hover {
+        background: #edf2f7;
+        transform: translateX(5px);
+    }
+
+    .activity-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin-right: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .activity-details h4 {
+        margin: 0 0 0.25rem 0;
+        color: #2d3748;
+        font-weight: 600;
+    }
+
+    .activity-details p {
+        margin: 0;
+        color: #718096;
+        font-size: 0.9rem;
+    }
+
+    .edit-form {
+        display: none;
+        background: #f7fafc;
+        border-radius: 10px;
+        padding: 2rem;
+        margin-top: 1rem;
+    }
+
+    .edit-form.active {
+        display: block;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #4a5568;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .btn-save {
+        background: #48bb78;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-right: 1rem;
+    }
+
+    .btn-cancel {
+        background: #a0aec0;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        .profile-content {
+            grid-template-columns: 1fr;
+        }
+
+        .profile-header {
+            padding: 2rem 1rem;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+        }
+
+        .tabs-nav {
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-avatar">
+            {{ user.first_name.0|default:user.username.0|upper }}{{ user.last_name.0|upper }}
+        </div>
+        <h1 class="profile-name">{{ user.get_full_name|default:user.username }}</h1>
+        <p class="profile-role">{{ user.profile.role|default:"Member" }}</p>
+    </div>
+
+    <div class="profile-content">
+        <div class="profile-sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Account Information</h3>
+                <div class="info-item">
+                    <span class="info-label">Username:</span>
+                    <span class="info-value">{{ user.username }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value">{{ user.email }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Role:</span>
+                    <span class="info-value">{{ user.profile.role|default:"Member"|capfirst }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Joined:</span>
+                    <span class="info-value">{{ user.date_joined|date:"M d, Y" }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Last Login:</span>
+                    <span class="info-value">{{ user.last_login|date:"M d, Y"|default:"Never" }}</span>
+                </div>
+                <button class="btn-edit" onclick="toggleEditForm()">Edit Profile</button>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Quick Actions</h3>
+                <a href="{% url 'dashboard:home' %}" class="btn-edit" style="text-decoration: none; display: block; text-align: center; margin-bottom: 0.5rem;">
+                    View Dashboard
+                </a>
+                {% if user.profile.role == 'organization' %}
+                <a href="#" class="btn-edit" style="text-decoration: none; display: block; text-align: center; background: linear-gradient(135deg, #48bb78, #38a169);">
+                    Create Campaign
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="profile-main">
+            <div class="tabs-container">
+                <div class="tabs-nav">
+                    <button class="tab-button active" onclick="showTab('overview')">Overview</button>
+                    <button class="tab-button" onclick="showTab('activity')">Activity</button>
+                    <button class="tab-button" onclick="showTab('settings')">Settings</button>
+                </div>
+
+                <div id="overview" class="tab-content active">
+                    <div class="stats-grid">
+                        {% if user.profile.role == 'donor' %}
+                        <div class="stat-card">
+                            <div class="stat-number">{{ user.donations.count|default:0 }}</div>
+                            <div class="stat-label">Donations Made</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${{ user.donations.aggregate.total_amount|default:0 }}</div>
+                            <div class="stat-label">Total Donated</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">{{ user.bookmarks.count|default:0 }}</div>
+                            <div class="stat-label">Bookmarked</div>
+                        </div>
+                        {% elif user.profile.role == 'organization' %}
+                        <div class="stat-card">
+                            <div class="stat-number">{{ user.campaigns.count|default:0 }}</div>
+                            <div class="stat-label">Campaigns</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${{ user.campaigns.aggregate.total_raised|default:0 }}</div>
+                            <div class="stat-label">Total Raised</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">{{ user.campaigns.aggregate.total_donors|default:0 }}</div>
+                            <div class="stat-label">Total Donors</div>
+                        </div>
+                        {% endif %}
+                        <div class="stat-card">
+                            <div class="stat-number">{{ user.notifications.unread.count|default:0 }}</div>
+                            <div class="stat-label">Unread Notifications</div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 1rem; color: #2d3748;">Profile Summary</h3>
+                    <p style="color: #718096; line-height: 1.6;">
+                        {% if user.profile.bio %}
+                            {{ user.profile.bio }}
+                        {% else %}
+                            Welcome to CrowdFund! Update your profile to tell others about yourself and your interests.
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div id="activity" class="tab-content">
+                    <h3 style="margin-bottom: 1rem; color: #2d3748;">Recent Activity</h3>
+                    <div class="activity-item">
+                        <div class="activity-icon">👤</div>
+                        <div class="activity-details">
+                            <h4>Profile Updated</h4>
+                            <p>You updated your profile information</p>
+                        </div>
+                    </div>
+                    
+                    {% if user.profile.role == 'donor' %}
+                    <div class="activity-item">
+                        <div class="activity-icon">💝</div>
+                        <div class="activity-details">
+                            <h4>Recent Donation</h4>
+                            <p>You donated to a campaign - Thank you for your support!</p>
+                        </div>
+                    </div>
+                    {% elif user.profile.role == 'organization' %}
+                    <div class="activity-item">
+                        <div class="activity-icon">🎯</div>
+                        <div class="activity-details">
+                            <h4>Campaign Progress</h4>
+                            <p>Your campaigns are making progress towards their goals</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">🔔</div>
+                        <div class="activity-details">
+                            <h4>Welcome to CrowdFund</h4>
+                            <p>Your account was successfully created</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings" class="tab-content">
+                    <h3 style="margin-bottom: 1rem; color: #2d3748;">Account Settings</h3>
+                    <div style="background: #f7fafc; border-radius: 10px; padding: 1.5rem;">
+                        <h4 style="margin-bottom: 1rem; color: #2d3748;">Notification Preferences</h4>
+                        <label style="display: block; margin-bottom: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" checked style="margin-right: 0.5rem;">
+                            Email notifications for new donations
+                        </label>
+                        <label style="display: block; margin-bottom: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" checked style="margin-right: 0.5rem;">
+                            Campaign updates and milestones
+                        </label>
+                        <label style="display: block; margin-bottom: 1rem; cursor: pointer;">
+                            <input type="checkbox" style="margin-right: 0.5rem;">
+                            Marketing and promotional emails
+                        </label>
+                        <button class="btn-save">Save Settings</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="edit-form" class="edit-form">
+                <h3 style="margin-bottom: 1rem; color: #2d3748;">Edit Profile</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-input" value="{{ user.first_name }}" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-input" value="{{ user.last_name }}" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" value="{{ user.email }}" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Bio</label>
+                        <textarea class="form-input" name="bio" rows="4" placeholder="Tell us about yourself...">{{ user.profile.bio|default:"" }}</textarea>
+                    </div>
+                    <button type="submit" class="btn-save">Save Changes</button>
+                    <button type="button" class="btn-cancel" onclick="toggleEditForm()">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showTab(tabName) {
+    // Hide all tab contents
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(content => content.classList.remove('active'));
+    
+    // Remove active class from all tab buttons
+    const tabButtons = document.querySelectorAll('.tab-button');
+    tabButtons.forEach(button => button.classList.remove('active'));
+    
+    // Show selected tab content
+    document.getElementById(tabName).classList.add('active');
+    
+    // Add active class to clicked button
+    event.target.classList.add('active');
+}
+
+function toggleEditForm() {
+    const editForm = document.getElementById('edit-form');
+    editForm.classList.toggle('active');
+}
+
+// Auto-hide success messages
+document.addEventListener('DOMContentLoaded', function() {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+        setTimeout(() => {
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 300);
+        }, 5000);
+    });
+});
+</script>
+{% endblock %}

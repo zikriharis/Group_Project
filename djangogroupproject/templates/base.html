@@ -23,8 +23,18 @@
                 <nav class="desktop-nav">
                     <ul class="nav-menu">
                         <li><a href="{% url 'campaigns:list' %}">Campaigns</a></li>
-                        <li><a href="{% url 'donations:my_donations' %}">My Donations</a></li>
-                        <li><a href="/admin/">Admin</a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'dashboard:home' %}">Dashboard</a></li>
+                            <li><a href="{% url 'donations:my_donations' %}">My Donations</a></li>
+                            <li><a href="{% url 'users:profile' %}">Profile</a></li>
+                            <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'users:login' %}">Login</a></li>
+                            <li><a href="{% url 'users:register' %}">Register</a></li>
+                        {% endif %}
+                        {% if user.is_staff %}
+                            <li><a href="/admin/">Admin</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
 
@@ -40,8 +50,18 @@
             <nav class="mobile-nav" id="mobileNav">
                 <ul class="mobile-nav-menu">
                     <li><a href="{% url 'campaigns:list' %}">Campaigns</a></li>
-                    <li><a href="{% url 'donations:my_donations' %}">My Donations</a></li>
-                    <li><a href="/admin/">Admin</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'dashboard:home' %}">Dashboard</a></li>
+                        <li><a href="{% url 'donations:my_donations' %}">My Donations</a></li>
+                        <li><a href="{% url 'users:profile' %}">Profile</a></li>
+                        <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'users:login' %}">Login</a></li>
+                        <li><a href="{% url 'users:register' %}">Register</a></li>
+                    {% endif %}
+                    {% if user.is_staff %}
+                        <li><a href="/admin/">Admin</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>
@@ -61,6 +81,9 @@
 
     <!-- Universal JavaScript -->
     <script src="{% static 'js/base.js' %}"></script>
+    
+    <!-- Chart.js for dashboard analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Page-specific JavaScript -->
     {% block extra_js %}{% endblock %}

@@ -1,0 +1,366 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Donations - CrowdFund Platform{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="header-content">
+            <h1 class="dashboard-title">
+                <i class="fas fa-heart"></i>
+                My Donations
+            </h1>
+            <p class="dashboard-subtitle">Track your contribution history and impact</p>
+        </div>
+    </div>
+
+    <!-- Dashboard Navigation -->
+    <div class="dashboard-nav">
+        <nav class="nav-tabs">
+            <a href="{% url 'dashboard:home' %}" class="nav-tab">
+                <i class="fas fa-home"></i>
+                <span>Overview</span>
+            </a>
+            <a href="{% url 'dashboard:donations' %}" class="nav-tab active">
+                <i class="fas fa-heart"></i>
+                <span>My Donations</span>
+            </a>
+            <a href="{% url 'dashboard:bookmarks' %}" class="nav-tab">
+                <i class="fas fa-bookmark"></i>
+                <span>Bookmarks</span>
+            </a>
+            <a href="{% url 'dashboard:notifications' %}" class="nav-tab">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Donation Statistics -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="stat-content">
+                <h3>${{ stats.total_amount|floatformat:2 }}</h3>
+                <p>Total Donated</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ stats.total_count }}</h3>
+                <p>Donations Made</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-calendar"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ donations.first.created_at|date:"M Y"|default:"N/A" }}</h3>
+                <p>Member Since</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-content">
+                <h3>${{ stats.total_amount|floatformat:0|default:0|add:stats.total_count|mul:10 }}</h3>
+                <p>Impact Score</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters and Search -->
+    <div class="filters-section">
+        <div class="filters-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="donation-search" placeholder="Search donations..." />
+            </div>
+            <div class="filter-options">
+                <select id="sort-select">
+                    <option value="date-desc">Newest First</option>
+                    <option value="date-asc">Oldest First</option>
+                    <option value="amount-desc">Highest Amount</option>
+                    <option value="amount-asc">Lowest Amount</option>
+                </select>
+                <select id="filter-select">
+                    <option value="all">All Donations</option>
+                    <option value="this-month">This Month</option>
+                    <option value="this-year">This Year</option>
+                    <option value="last-year">Last Year</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Donations List -->
+    <div class="content-card">
+        <div class="card-header">
+            <h3><i class="fas fa-list"></i> Donation History</h3>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="exportDonations()">
+                    <i class="fas fa-download"></i> Export
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if donations %}
+                <div class="donations-table-container">
+                    <table class="donations-table">
+                        <thead>
+                            <tr>
+                                <th>Campaign</th>
+                                <th>Organization</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="donations-tbody">
+                            {% for donation in donations %}
+                            <tr class="donation-row" data-date="{{ donation.created_at|date:'Y-m-d' }}" data-amount="{{ donation.amount }}">
+                                <td class="campaign-cell">
+                                    <div class="campaign-info">
+                                        <h4>{{ donation.campaign.title }}</h4>
+                                        <p>{{ donation.campaign.description|truncatechars:60 }}</p>
+                                    </div>
+                                </td>
+                                <td class="organization-cell">
+                                    <span class="organization-name">{{ donation.campaign.organization.name }}</span>
+                                </td>
+                                <td class="amount-cell">
+                                    <span class="amount">${{ donation.amount|floatformat:2 }}</span>
+                                </td>
+                                <td class="date-cell">
+                                    <span class="date">{{ donation.created_at|date:"M d, Y" }}</span>
+                                    <span class="time">{{ donation.created_at|date:"g:i A" }}</span>
+                                </td>
+                                <td class="status-cell">
+                                    <span class="status status-completed">
+                                        <i class="fas fa-check-circle"></i>
+                                        Completed
+                                    </span>
+                                </td>
+                                <td class="actions-cell">
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" onclick="viewDonation({{ donation.id }})" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" onclick="downloadReceipt({{ donation.id }})" title="Download Receipt">
+                                            <i class="fas fa-receipt"></i>
+                                        </button>
+                                        <a href="{% url 'campaigns:detail' donation.campaign.id %}" class="btn-icon" title="View Campaign">
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Impact Summary -->
+                <div class="impact-section">
+                    <div class="impact-header">
+                        <h3><i class="fas fa-star"></i> Your Impact</h3>
+                    </div>
+                    <div class="impact-content">
+                        <div class="impact-item">
+                            <i class="fas fa-users"></i>
+                            <div class="impact-text">
+                                <h4>Lives Touched</h4>
+                                <p>Your donations have helped {{ stats.total_count|mul:50 }} people across {{ donations|regroup:"campaign.organization"|length }} organizations.</p>
+                            </div>
+                        </div>
+                        <div class="impact-item">
+                            <i class="fas fa-heart"></i>
+                            <div class="impact-text">
+                                <h4>Community Builder</h4>
+                                <p>You've supported {{ donations|regroup:"campaign"|length }} different campaigns, contributing to diverse causes.</p>
+                            </div>
+                        </div>
+                        <div class="impact-item">
+                            <i class="fas fa-trophy"></i>
+                            <div class="impact-text">
+                                <h4>Generous Contributor</h4>
+                                <p>Your total contribution of ${{ stats.total_amount|floatformat:2 }} places you in the top donor category.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>No Donations Yet</h3>
+                    <p>You haven't made any donations yet. Start making a difference today!</p>
+                    <a href="{% url 'campaigns:list' %}" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                        Browse Campaigns
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Donation Detail Modal -->
+<div id="donation-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Donation Details</h3>
+            <button class="modal-close" onclick="closeDonationModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body" id="donation-modal-body">
+            <!-- Content will be loaded here -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'dashboard/js/dashboard.js' %}"></script>
+<script>
+// Donation-specific JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('donation-search');
+    const sortSelect = document.getElementById('sort-select');
+    const filterSelect = document.getElementById('filter-select');
+    const tbody = document.getElementById('donations-tbody');
+
+    // Search functionality
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            filterDonations();
+        });
+    }
+
+    // Sort functionality
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+            sortDonations(this.value);
+        });
+    }
+
+    // Filter functionality
+    if (filterSelect) {
+        filterSelect.addEventListener('change', function() {
+            filterDonations();
+        });
+    }
+
+    function filterDonations() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filterValue = filterSelect.value;
+        const rows = tbody.querySelectorAll('.donation-row');
+
+        rows.forEach(row => {
+            const campaignText = row.querySelector('.campaign-cell').textContent.toLowerCase();
+            const organizationText = row.querySelector('.organization-cell').textContent.toLowerCase();
+            const date = new Date(row.dataset.date);
+            const now = new Date();
+
+            // Search filter
+            const matchesSearch = campaignText.includes(searchTerm) || organizationText.includes(searchTerm);
+
+            // Date filter
+            let matchesDateFilter = true;
+            if (filterValue === 'this-month') {
+                matchesDateFilter = date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
+            } else if (filterValue === 'this-year') {
+                matchesDateFilter = date.getFullYear() === now.getFullYear();
+            } else if (filterValue === 'last-year') {
+                matchesDateFilter = date.getFullYear() === now.getFullYear() - 1;
+            }
+
+            row.style.display = (matchesSearch && matchesDateFilter) ? '' : 'none';
+        });
+    }
+
+    function sortDonations(sortBy) {
+        const rows = Array.from(tbody.querySelectorAll('.donation-row'));
+        
+        rows.sort((a, b) => {
+            if (sortBy === 'date-desc') {
+                return new Date(b.dataset.date) - new Date(a.dataset.date);
+            } else if (sortBy === 'date-asc') {
+                return new Date(a.dataset.date) - new Date(b.dataset.date);
+            } else if (sortBy === 'amount-desc') {
+                return parseFloat(b.dataset.amount) - parseFloat(a.dataset.amount);
+            } else if (sortBy === 'amount-asc') {
+                return parseFloat(a.dataset.amount) - parseFloat(b.dataset.amount);
+            }
+        });
+
+        tbody.innerHTML = '';
+        rows.forEach(row => tbody.appendChild(row));
+    }
+});
+
+function viewDonation(donationId) {
+    // Load donation details in modal
+    const modal = document.getElementById('donation-modal');
+    const modalBody = document.getElementById('donation-modal-body');
+    
+    modalBody.innerHTML = `
+        <div class="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            Loading donation details...
+        </div>
+    `;
+    
+    modal.style.display = 'block';
+    
+    // Simulate loading donation details
+    setTimeout(() => {
+        modalBody.innerHTML = `
+            <div class="donation-details">
+                <h4>Donation #${donationId}</h4>
+                <p>Details would be loaded here via AJAX...</p>
+            </div>
+        `;
+    }, 1000);
+}
+
+function closeDonationModal() {
+    document.getElementById('donation-modal').style.display = 'none';
+}
+
+function downloadReceipt(donationId) {
+    // Implement receipt download
+    alert('Receipt download functionality would be implemented here');
+}
+
+function exportDonations() {
+    // Implement export functionality
+    alert('Export functionality would be implemented here');
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('donation-modal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}

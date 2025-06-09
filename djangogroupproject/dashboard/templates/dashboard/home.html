@@ -1,0 +1,737 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - CrowdFund Platform{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="header-content">
+            <h1 class="dashboard-title">
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+            </h1>
+            <p class="dashboard-subtitle">
+                {% if dashboard_type == 'donor' %}
+                    Welcome back! Track your contributions and discover new campaigns.
+                {% elif dashboard_type == 'organization' %}
+                    Manage your campaigns and track fundraising progress.
+                {% elif dashboard_type == 'manager' %}
+                    Monitor assigned campaigns and their performance.
+                {% elif dashboard_type == 'admin' %}
+                    Platform overview and administrative controls.
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <!-- Dashboard Navigation -->
+    <div class="dashboard-nav">
+        <nav class="nav-tabs">
+            <a href="{% url 'dashboard:home' %}" class="nav-tab active">
+                <i class="fas fa-home"></i>
+                <span>Overview</span>
+            </a>
+            {% if dashboard_type == 'donor' %}
+            <a href="{% url 'dashboard:donations' %}" class="nav-tab">
+                <i class="fas fa-heart"></i>
+                <span>My Donations</span>
+            </a>
+            <a href="{% url 'dashboard:bookmarks' %}" class="nav-tab">
+                <i class="fas fa-bookmark"></i>
+                <span>Bookmarks</span>
+            </a>
+            {% elif dashboard_type == 'organization' or dashboard_type == 'manager' %}
+            <a href="{% url 'dashboard:campaigns' %}" class="nav-tab">
+                <i class="fas fa-bullhorn"></i>
+                <span>My Campaigns</span>
+            </a>
+            {% endif %}
+            <a href="{% url 'dashboard:notifications' %}" class="nav-tab">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">        {% if dashboard_type == 'donor' %}
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="total_donated">${{ total_donated|floatformat:2 }}</h3>
+                    <p>Total Donated</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="donation_count">{{ donation_count }}</h3>
+                    <p>Donations Made</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-bookmark"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="bookmarks_count">{{ bookmarks.count }}</h3>
+                    <p>Bookmarked</p>
+                </div>
+            </div>        {% elif dashboard_type == 'organization' %}
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="total_campaigns">{{ total_campaigns }}</h3>
+                    <p>Total Campaigns</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="active_campaigns">{{ active_campaigns }}</h3>
+                    <p>Active Campaigns</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="total_raised">${{ total_raised|floatformat:2 }}</h3>
+                    <p>Total Raised</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="total_donations">{{ total_donations }}</h3>
+                    <p>Total Donations</p>
+                </div>
+            </div>
+        {% elif dashboard_type == 'manager' %}
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ assigned_campaigns }}</h3>
+                    <p>Assigned Campaigns</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>${{ total_raised|floatformat:2 }}</h3>
+                    <p>Total Managed</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ total_donations }}</h3>
+                    <p>Donations Received</p>
+                </div>
+            </div>        {% elif dashboard_type == 'admin' %}
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="total_campaigns">{{ total_campaigns }}</h3>
+                    <p>Total Campaigns</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="total_organizations">{{ total_organizations }}</h3>
+                    <p>Organizations</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="total_users">{{ total_users }}</h3>
+                    <p>Platform Users</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 data-stat="total_platform_raised">${{ total_platform_raised|floatformat:2 }}</h3>
+                    <p>Platform Revenue</p>
+                </div>
+            </div>{% endif %}
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+        {% if dashboard_type == 'donor' %}
+        <div class="chart-row">
+            <div class="chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-line"></i> Donation Trend</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="donationTrendChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-pie"></i> Donation by Category</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="categoryChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        {% elif dashboard_type == 'organization' %}
+        <div class="chart-row">
+            <div class="chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-area"></i> Monthly Fundraising</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="fundraisingChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-doughnut"></i> Campaign Status</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="statusChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        {% elif dashboard_type == 'admin' %}
+        <div class="chart-row">
+            <div class="chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-bar"></i> Platform Growth</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="platformChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-users"></i> User Distribution</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="userRolesChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="dashboard-content">
+        <div class="content-row">
+            <!-- Recent Activity / Recent Donations -->
+            {% if dashboard_type == 'donor' %}
+            <div class="content-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-history"></i> Recent Donations</h3>
+                    <a href="{% url 'dashboard:donations' %}" class="btn btn-link">View All</a>
+                </div>
+                <div class="card-body">
+                    {% if recent_donations %}
+                        <div class="donation-list">
+                            {% for donation in recent_donations %}
+                            <div class="donation-item">
+                                <div class="donation-info">
+                                    <h4>{{ donation.campaign.title }}</h4>
+                                    <p>{{ donation.created_at|date:"M d, Y" }}</p>
+                                </div>
+                                <div class="donation-amount">
+                                    ${{ donation.amount|floatformat:2 }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fas fa-heart"></i>
+                            <p>No donations yet. Start supporting campaigns!</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Recommended Campaigns -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-star"></i> Recommended for You</h3>
+                </div>
+                <div class="card-body">
+                    {% if recommended_campaigns %}
+                        <div class="campaign-grid">
+                            {% for campaign in recommended_campaigns %}
+                            <div class="campaign-card-mini">
+                                <div class="campaign-image">
+                                    {% if campaign.main_image %}
+                                        <img src="{{ campaign.main_image.url }}" alt="{{ campaign.title }}">
+                                    {% else %}
+                                        <div class="placeholder-image">
+                                            <i class="fas fa-image"></i>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="campaign-info">
+                                    <h4>{{ campaign.title|truncatechars:30 }}</h4>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: {{ campaign.progress_percentage }}%"></div>
+                                    </div>
+                                    <p>${{ campaign.current_amount|floatformat:0 }} raised</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fas fa-search"></i>
+                            <p>No recommendations available yet.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% elif dashboard_type == 'organization' or dashboard_type == 'manager' %}
+            <!-- Campaign Management -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-bullhorn"></i> Your Campaigns</h3>
+                    <a href="{% url 'dashboard:campaigns' %}" class="btn btn-link">Manage All</a>
+                </div>
+                <div class="card-body">
+                    {% if campaigns %}
+                        <div class="campaign-list">
+                            {% for campaign in campaigns %}
+                            <div class="campaign-item">
+                                <div class="campaign-info">
+                                    <h4>{{ campaign.title }}</h4>
+                                    <p class="campaign-status status-{{ campaign.status }}">{{ campaign.get_status_display }}</p>
+                                </div>
+                                <div class="campaign-stats">
+                                    <div class="stat">
+                                        <span class="value">${{ campaign.current_amount|floatformat:0 }}</span>
+                                        <span class="label">Raised</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="value">{{ campaign.progress_percentage|floatformat:0 }}%</span>
+                                        <span class="label">Progress</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fas fa-plus-circle"></i>
+                            <p>No campaigns yet. Create your first campaign!</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Recent Donations -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-heart"></i> Recent Donations</h3>
+                </div>
+                <div class="card-body">
+                    {% if recent_donations %}
+                        <div class="donation-list">
+                            {% for donation in recent_donations %}
+                            <div class="donation-item">
+                                <div class="donation-info">
+                                    <h4>{{ donation.user.get_full_name|default:donation.user.username }}</h4>
+                                    <p>{{ donation.campaign.title }} • {{ donation.created_at|date:"M d, Y" }}</p>
+                                </div>
+                                <div class="donation-amount">
+                                    ${{ donation.amount|floatformat:2 }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fas fa-heart"></i>
+                            <p>No donations received yet.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% elif dashboard_type == 'admin' %}
+            <!-- Platform Overview -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-chart-line"></i> Platform Activity</h3>
+                </div>
+                <div class="card-body">
+                    <div class="activity-stats">
+                        <div class="activity-item">
+                            <i class="fas fa-bullhorn"></i>
+                            <div class="activity-info">
+                                <h4>{{ total_campaigns }}</h4>
+                                <p>Total Campaigns</p>
+                                <small>{{ active_campaigns }} active</small>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <i class="fas fa-building"></i>
+                            <div class="activity-info">
+                                <h4>{{ total_organizations }}</h4>
+                                <p>Organizations</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <div class="activity-info">
+                                <h4>${{ total_platform_raised|floatformat:0 }}</h4>
+                                <p>Total Raised</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Campaigns -->
+            <div class="content-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-clock"></i> Recent Campaigns</h3>
+                </div>
+                <div class="card-body">
+                    {% if recent_campaigns %}
+                        <div class="campaign-list">
+                            {% for campaign in recent_campaigns %}
+                            <div class="campaign-item">
+                                <div class="campaign-info">
+                                    <h4>{{ campaign.title }}</h4>
+                                    <p>{{ campaign.organization.name }} • {{ campaign.created_at|date:"M d, Y" }}</p>
+                                </div>
+                                <div class="campaign-stats">
+                                    <span class="status status-{{ campaign.status }}">{{ campaign.get_status_display }}</span>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <i class="fas fa-bullhorn"></i>
+                            <p>No campaigns found.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'dashboard/js/dashboard.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dashboard charts storage
+    window.dashboardCharts = {};
+    
+    // Chart.js configuration
+    Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+    Chart.defaults.color = '#6B7280';
+    
+    {% if dashboard_type == 'donor' %}
+    // Donation Trend Chart
+    const donationData = {{ monthly_donations|safe }};
+    if (donationData && donationData.length > 0) {
+        const ctx1 = document.getElementById('donationTrendChart').getContext('2d');
+        window.dashboardCharts.donationTrend = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: donationData.map(d => d.month),
+                datasets: [{
+                    label: 'Donations ($)',
+                    data: donationData.map(d => d.amount),
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    // Category Distribution Chart
+    const categoryData = {{ category_donations|safe }};
+    if (categoryData && categoryData.length > 0) {
+        const ctx2 = document.getElementById('categoryChart').getContext('2d');
+        window.dashboardCharts.categoryChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: categoryData.map(d => d.campaign__category || 'Other'),
+                datasets: [{
+                    data: categoryData.map(d => d.total),
+                    backgroundColor: [
+                        '#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    {% elif dashboard_type == 'organization' %}
+    // Fundraising Chart
+    const fundraisingData = {{ monthly_raised|safe }};
+    if (fundraisingData && fundraisingData.length > 0) {
+        const ctx3 = document.getElementById('fundraisingChart').getContext('2d');
+        window.dashboardCharts.fundraisingChart = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: fundraisingData.map(d => d.month),
+                datasets: [{
+                    label: 'Amount Raised ($)',
+                    data: fundraisingData.map(d => d.amount),
+                    backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                    borderColor: '#667eea',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    // Status Chart
+    const statusData = {{ status_breakdown|safe }};
+    if (statusData && statusData.length > 0) {
+        const ctx4 = document.getElementById('statusChart').getContext('2d');
+        window.dashboardCharts.statusChart = new Chart(ctx4, {
+            type: 'pie',
+            data: {
+                labels: statusData.map(d => d.status.charAt(0).toUpperCase() + d.status.slice(1)),
+                datasets: [{
+                    data: statusData.map(d => d.count),
+                    backgroundColor: ['#667eea', '#f093fb', '#4facfe', '#43e97b', '#fa709a'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    {% elif dashboard_type == 'admin' %}
+    // Platform Growth Chart
+    const platformData = {{ monthly_stats|safe }};
+    if (platformData && platformData.length > 0) {
+        const ctx5 = document.getElementById('platformChart').getContext('2d');
+        window.dashboardCharts.platformChart = new Chart(ctx5, {
+            type: 'line',
+            data: {
+                labels: platformData.map(d => d.month),
+                datasets: [{
+                    label: 'Donations ($)',
+                    data: platformData.map(d => d.donations),
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    yAxisID: 'y'
+                }, {
+                    label: 'New Campaigns',
+                    data: platformData.map(d => d.campaigns),
+                    borderColor: '#f093fb',
+                    backgroundColor: 'rgba(240, 147, 251, 0.1)',
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        grid: {
+                            drawOnChartArea: false,
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return value + ' campaigns';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    
+    // User Roles Chart
+    const userRolesData = {{ user_roles|safe }};
+    if (userRolesData && userRolesData.length > 0) {
+        const ctx6 = document.getElementById('userRolesChart').getContext('2d');
+        window.dashboardCharts.userRolesChart = new Chart(ctx6, {
+            type: 'doughnut',
+            data: {
+                labels: userRolesData.map(d => d.role.charAt(0).toUpperCase() + d.role.slice(1)),
+                datasets: [{
+                    data: userRolesData.map(d => d.count),
+                    backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#43e97b'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    }
+                }
+            }
+        });
+    }
+    {% endif %}
+    
+    // Initialize dashboard functionality
+    if (typeof Dashboard !== 'undefined') {
+        Dashboard.init();
+    }
+});
+</script>
+{% endblock %}

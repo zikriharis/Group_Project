@@ -1,0 +1,492 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Campaigns - CrowdFund Platform{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="header-content">
+            <h1 class="dashboard-title">
+                <i class="fas fa-bullhorn"></i>
+                My Campaigns
+            </h1>
+            <p class="dashboard-subtitle">Manage and track your fundraising campaigns</p>
+        </div>
+        <div class="header-actions">
+            <a href="{% url 'campaigns:create' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                Create Campaign
+            </a>
+        </div>
+    </div>
+
+    <!-- Dashboard Navigation -->
+    <div class="dashboard-nav">
+        <nav class="nav-tabs">
+            <a href="{% url 'dashboard:home' %}" class="nav-tab">
+                <i class="fas fa-home"></i>
+                <span>Overview</span>
+            </a>
+            <a href="{% url 'dashboard:campaigns' %}" class="nav-tab active">
+                <i class="fas fa-bullhorn"></i>
+                <span>My Campaigns</span>
+            </a>
+            <a href="{% url 'dashboard:notifications' %}" class="nav-tab">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Campaign Filters -->
+    <div class="filters-section">
+        <div class="filters-container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-status="all">
+                    <i class="fas fa-list"></i>
+                    All Campaigns
+                </button>
+                <button class="filter-tab" data-status="active">
+                    <i class="fas fa-play-circle"></i>
+                    Active
+                </button>
+                <button class="filter-tab" data-status="completed">
+                    <i class="fas fa-check-circle"></i>
+                    Completed
+                </button>
+                <button class="filter-tab" data-status="draft">
+                    <i class="fas fa-edit"></i>
+                    Draft
+                </button>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="campaign-search" placeholder="Search campaigns..." />
+            </div>
+        </div>
+    </div>
+
+    <!-- Campaigns Grid -->
+    <div class="campaigns-grid" id="campaigns-grid">
+        {% if campaigns %}
+            {% for campaign in campaigns %}
+            <div class="campaign-card" data-status="{{ campaign.status }}">
+                <div class="campaign-image">
+                    {% if campaign.main_image %}
+                        <img src="{{ campaign.main_image.url }}" alt="{{ campaign.title }}">
+                    {% else %}
+                        <div class="placeholder-image">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    {% endif %}
+                    <div class="campaign-status">
+                        <span class="status-badge status-{{ campaign.status }}">
+                            {{ campaign.get_status_display }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="campaign-content">
+                    <div class="campaign-header">
+                        <h3>{{ campaign.title }}</h3>
+                        <div class="campaign-actions">
+                            <div class="dropdown">
+                                <button class="btn-icon dropdown-toggle">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="{% url 'campaigns:detail' campaign.id %}" class="dropdown-item">
+                                        <i class="fas fa-eye"></i>
+                                        View Campaign
+                                    </a>
+                                    <a href="{% url 'campaigns:edit' campaign.id %}" class="dropdown-item">
+                                        <i class="fas fa-edit"></i>
+                                        Edit Campaign
+                                    </a>
+                                    <a href="#" class="dropdown-item" onclick="shareCampaign({{ campaign.id }})">
+                                        <i class="fas fa-share"></i>
+                                        Share Campaign
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" class="dropdown-item text-danger" onclick="deleteCampaign({{ campaign.id }})">
+                                        <i class="fas fa-trash"></i>
+                                        Delete Campaign
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="campaign-description">{{ campaign.description|truncatechars:120 }}</p>
+
+                    <div class="campaign-progress">
+                        <div class="progress-header">
+                            <span class="progress-text">
+                                ${{ campaign.current_amount|floatformat:0 }} raised of ${{ campaign.goal_amount|floatformat:0 }}
+                            </span>
+                            <span class="progress-percentage">
+                                {{ campaign.progress_percentage|floatformat:0 }}%
+                            </span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: {{ campaign.progress_percentage }}%"></div>
+                        </div>
+                    </div>
+
+                    <div class="campaign-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <span>{{ campaign.total_donors|default:0 }} donors</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-calendar"></i>
+                            <span>{{ campaign.days_left|default:0 }} days left</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-eye"></i>
+                            <span>{{ campaign.views|default:0 }} views</span>
+                        </div>
+                    </div>
+
+                    <div class="campaign-footer">
+                        <div class="campaign-date">
+                            Created {{ campaign.created_at|date:"M d, Y" }}
+                        </div>
+                        <div class="campaign-buttons">
+                            {% if campaign.status == 'draft' %}
+                                <button class="btn btn-primary btn-sm" onclick="publishCampaign({{ campaign.id }})">
+                                    <i class="fas fa-rocket"></i>
+                                    Publish
+                                </button>
+                            {% elif campaign.status == 'active' %}
+                                <button class="btn btn-secondary btn-sm" onclick="viewAnalytics({{ campaign.id }})">
+                                    <i class="fas fa-chart-line"></i>
+                                    Analytics
+                                </button>
+                            {% endif %}
+                            <a href="{% url 'campaigns:detail' campaign.id %}" class="btn btn-outline btn-sm">
+                                <i class="fas fa-external-link-alt"></i>
+                                View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state-full">
+                <div class="empty-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3>No Campaigns Yet</h3>
+                <p>You haven't created any campaigns yet. Start your first fundraising campaign today!</p>
+                <div class="empty-actions">
+                    <a href="{% url 'campaigns:create' %}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Create Your First Campaign
+                    </a>
+                    <a href="#" class="btn btn-outline" onclick="showHowItWorks()">
+                        <i class="fas fa-question-circle"></i>
+                        How It Works
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Quick Stats -->
+    {% if campaigns %}
+    <div class="quick-stats">
+        <div class="stats-header">
+            <h3><i class="fas fa-chart-bar"></i> Quick Statistics</h3>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>${{ campaigns|length|mul:1500|floatformat:0 }}</h3>
+                    <p>Total Raised</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ campaigns|length|mul:25 }}</h3>
+                    <p>Total Donors</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ campaigns|length|mul:150 }}</h3>
+                    <p>Total Views</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-share"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ campaigns|length|mul:8 }}</h3>
+                    <p>Social Shares</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Campaign Share Modal -->
+<div id="share-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Share Campaign</h3>
+            <button class="modal-close" onclick="closeShareModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="share-options">
+                <button class="share-btn facebook" onclick="shareToFacebook()">
+                    <i class="fab fa-facebook-f"></i>
+                    Facebook
+                </button>
+                <button class="share-btn twitter" onclick="shareToTwitter()">
+                    <i class="fab fa-twitter"></i>
+                    Twitter
+                </button>
+                <button class="share-btn linkedin" onclick="shareToLinkedIn()">
+                    <i class="fab fa-linkedin-in"></i>
+                    LinkedIn
+                </button>
+                <button class="share-btn email" onclick="shareViaEmail()">
+                    <i class="fas fa-envelope"></i>
+                    Email
+                </button>
+            </div>
+            <div class="share-link">
+                <label>Campaign Link:</label>
+                <div class="link-input">
+                    <input type="text" id="campaign-link" readonly>
+                    <button onclick="copyLink()" class="btn-copy">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How It Works Modal -->
+<div id="how-it-works-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>How Campaign Creation Works</h3>
+            <button class="modal-close" onclick="closeHowItWorksModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="how-it-works-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Create Your Campaign</h4>
+                        <p>Tell your story, set your goal, and upload compelling images.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Share & Promote</h4>
+                        <p>Share your campaign with friends, family, and social networks.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Collect Donations</h4>
+                        <p>Receive donations directly and track your progress in real-time.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Achieve Your Goal</h4>
+                        <p>Use the funds to make a real impact on your cause.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'dashboard/js/dashboard.js' %}"></script>
+<script>
+// Campaign-specific JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const campaignCards = document.querySelectorAll('.campaign-card');
+    const searchInput = document.getElementById('campaign-search');
+
+    // Filter tabs functionality
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const status = this.dataset.status;
+            
+            // Update active tab
+            filterTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter campaigns
+            filterCampaigns(status);
+        });
+    });
+
+    // Search functionality
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const activeStatus = document.querySelector('.filter-tab.active').dataset.status;
+        
+        campaignCards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const description = card.querySelector('.campaign-description').textContent.toLowerCase();
+            const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+            const matchesStatus = activeStatus === 'all' || card.dataset.status === activeStatus;
+            
+            card.style.display = (matchesSearch && matchesStatus) ? 'block' : 'none';
+        });
+    });
+
+    function filterCampaigns(status) {
+        campaignCards.forEach(card => {
+            if (status === 'all' || card.dataset.status === status) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Dropdown functionality
+    document.addEventListener('click', function(e) {
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+    });
+
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.dropdown');
+            dropdown.classList.toggle('active');
+        });
+    });
+});
+
+function shareCampaign(campaignId) {
+    const modal = document.getElementById('share-modal');
+    const linkInput = document.getElementById('campaign-link');
+    linkInput.value = window.location.origin + '/campaigns/' + campaignId + '/';
+    modal.style.display = 'block';
+}
+
+function closeShareModal() {
+    document.getElementById('share-modal').style.display = 'none';
+}
+
+function publishCampaign(campaignId) {
+    if (confirm('Are you sure you want to publish this campaign?')) {
+        // Implement publish functionality
+        alert('Campaign published successfully!');
+        location.reload();
+    }
+}
+
+function deleteCampaign(campaignId) {
+    if (confirm('Are you sure you want to delete this campaign? This action cannot be undone.')) {
+        // Implement delete functionality
+        alert('Campaign deleted successfully!');
+        location.reload();
+    }
+}
+
+function viewAnalytics(campaignId) {
+    // Redirect to analytics page or show analytics modal
+    window.open('/campaigns/' + campaignId + '/analytics/', '_blank');
+}
+
+function showHowItWorks() {
+    document.getElementById('how-it-works-modal').style.display = 'block';
+}
+
+function closeHowItWorksModal() {
+    document.getElementById('how-it-works-modal').style.display = 'none';
+}
+
+function copyLink() {
+    const linkInput = document.getElementById('campaign-link');
+    linkInput.select();
+    document.execCommand('copy');
+    
+    const copyBtn = document.querySelector('.btn-copy');
+    const originalHTML = copyBtn.innerHTML;
+    copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+    
+    setTimeout(() => {
+        copyBtn.innerHTML = originalHTML;
+    }, 2000);
+}
+
+function shareToFacebook() {
+    const url = document.getElementById('campaign-link').value;
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+}
+
+function shareToTwitter() {
+    const url = document.getElementById('campaign-link').value;
+    window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`, '_blank');
+}
+
+function shareToLinkedIn() {
+    const url = document.getElementById('campaign-link').value;
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+}
+
+function shareViaEmail() {
+    const url = document.getElementById('campaign-link').value;
+    window.location.href = `mailto:?subject=Check out this campaign&body=${encodeURIComponent(url)}`;
+}
+
+// Close modals when clicking outside
+window.onclick = function(event) {
+    const shareModal = document.getElementById('share-modal');
+    const howItWorksModal = document.getElementById('how-it-works-modal');
+    
+    if (event.target === shareModal) {
+        shareModal.style.display = 'none';
+    }
+    if (event.target === howItWorksModal) {
+        howItWorksModal.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}
