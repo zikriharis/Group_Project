@@ -9,18 +9,23 @@
 <canvas id="earningsChart" width="400" height="200"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  var ctx = document.getElementById('earningsChart').getContext('2d');
-  var earningsChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: {{ stats.earnings_dates|safe }},
-      datasets: [{
-        label: 'Earnings',
-        data: {{ stats.earnings_amounts|safe }},
-        fill: false,
-        borderColor: '#16a085'
-      }]
-    }
-  });
+  if (typeof Chart !== 'undefined') {
+    const ctx = document.getElementById('earningsChart').getContext('2d');
+    const earningsChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: {{ stats.earnings_dates|safe }},
+        datasets: [{
+          label: 'Earnings',
+          data: {{ stats.earnings_amounts|safe }},
+          fill: false,
+          borderColor: '#16a085'
+        }]
+      }
+    });
+  } else {
+    console.error('Chart.js is not loaded.');
+  }
 </script>
+
 {% endblock %}
