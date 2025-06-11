@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Donor Statistics for {{ organization.name }}</h2>
+<ul>
+  <li>Total Donors: {{ stats.total_donors }}</li>
+  <li>Returning Donors: {{ stats.returning_donors }}</li>
+  <li>Largest Single Donation: {{ stats.largest_donation }}</li>
+  <li>Most Supported Campaign: {{ stats.top_campaign }}</li>
+</ul>
+<canvas id="orgDonorChart" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  var ctx = document.getElementById('orgDonorChart').getContext('2d');
+  var orgDonorChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: {{ stats.top_campaigns_labels|safe }},
+      datasets: [{
+        label: 'Donations per Campaign',
+        data: {{ stats.top_campaigns_amounts|safe }},
+        backgroundColor: ['#48c9b0','#f7ca18','#e74c3c','#6c3483','#f4d03f']
+      }]
+    }
+  });
+</script>
+{% endblock %}

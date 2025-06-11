@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Campaign Manager Dashboard</h2>
-<ul>
-  <li><a href="{% url 'manager_notifications' %}">Notifications</a></li>
-</ul>
+<nav>
+  <a href="{% url 'manager_notifications' %}">Notifications</a>
+</nav>
+<hr>
 <h3>Assigned Campaigns</h3>
 <table>
   <tr>
-    <th>Title</th><th>Status</th><th>Goal</th><th>Current</th><th>Actions</th>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Goal</th>
+    <th>Current</th>
+    <th>Actions</th>
   </tr>
   {% for campaign in campaigns %}
     <tr>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Donors for {{ organization.name }}</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Total Donated</th>
+    <th>Campaigns Supported</th>
+  </tr>
+  {% for donor in donors %}
+    <tr>
+      <td>{{ donor.name }}</td>
+      <td>{% if donor.show_email %}{{ donor.email }}{% else %}Private{% endif %}</td>
+      <td>{{ donor.total_amount }}</td>
+      <td>{{ donor.campaigns_supported }}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="4">No donors yet.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

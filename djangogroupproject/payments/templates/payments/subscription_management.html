@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Campaign Subscription Management</h2>
+<table>
+  <tr>
+    <th>Campaign</th>
+    <th>Status</th>
+    <th>Payment Proof</th>
+    <th>Actions</th>
+  </tr>
+  {% for sub in subscriptions %}
+    <tr>
+      <td><a href="{% url 'campaign_detail' sub.campaign.slug %}">{{ sub.campaign.title }}</a></td>
+      <td>{{ sub.status }}</td>
+      <td>
+        {% if sub.payment_proof %}
+          <a href="{{ sub.payment_proof.url }}">View</a>
+        {% else %}
+          Not submitted
+        {% endif %}
+      </td>
+      <td>
+        {% if sub.status == 'pending' %}
+          <a href="{% url 'upload_payment_proof' sub.campaign.id %}">Upload Proof</a>
+        {% endif %}
+        {% if sub.status == 'active' %}
+          <a href="{% url 'stop_campaign' sub.campaign.id %}">Stop Campaign</a>
+        {% endif %}
+      </td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="4">No subscriptions found.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

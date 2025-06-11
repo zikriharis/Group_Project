@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Campaign Statistics: {{ campaign.title }}</h2>
+<ul>
+  <li>Current Amount: {{ campaign.current_amount }}</li>
+  <li>Goal: {{ campaign.goal_amount }}</li>
+  <li>Donors: {{ report.unique_donors }}</li>
+  <li>Donations Received: {{ report.total_donations }}</li>
+</ul>
+<canvas id="campaignStatsChart" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  var ctx = document.getElementById('campaignStatsChart').getContext('2d');
+  var campaignStatsChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: {{ report.donation_dates|safe }},
+      datasets: [{
+        label: 'Donations',
+        data: {{ report.donation_amounts|safe }},
+        fill: false,
+        borderColor: 'blue'
+      }]
+    }
+  });
+</script>
+{% endblock %}

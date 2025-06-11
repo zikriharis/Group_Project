@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Campaign Approval Status</h2>
+<table>
+  <tr>
+    <th>Campaign</th>
+    <th>Main Request</th>
+    <th>Page Setup</th>
+    <th>Actions</th>
+  </tr>
+  {% for campaign in campaigns %}
+    <tr>
+      <td><a href="{% url 'campaign_detail' campaign.slug %}">{{ campaign.title }}</a></td>
+      <td>
+        {{ campaign.get_main_status_display }}
+        {% if campaign.main_status == 'rejected' %}
+          <span style="color:red;">Rejected</span>
+          <br>Reason: {{ campaign.main_rejection_reason }}
+        {% elif campaign.main_status == 'pending' %}
+          <span style="color:orange;">Pending</span>
+        {% elif campaign.main_status == 'approved' %}
+          <span style="color:green;">Approved</span>
+        {% endif %}
+      </td>
+      <td>
+        {{ campaign.get_page_status_display }}
+        {% if campaign.page_status == 'rejected' %}
+          <span style="color:red;">Rejected</span>
+          <br>Reason: {{ campaign.page_rejection_reason }}
+        {% elif campaign.page_status == 'pending' %}
+          <span style="color:orange;">Pending</span>
+        {% elif campaign.page_status == 'approved' %}
+          <span style="color:green;">Approved</span>
+        {% endif %}
+      </td>
+      <td>
+        {% if campaign.main_status == 'rejected' %}
+          <a href="{% url 'main_request_reapply' campaign.id %}">Re-Request Main Setup</a>
+        {% endif %}
+        {% if campaign.page_status == 'rejected' %}
+          <a href="{% url 'page_setup_reapply' campaign.id %}">Re-Request Page Setup</a>
+        {% endif %}
+        {% if campaign.main_status == 'approved' and campaign.page_status != 'approved' %}
+          <a href="{% url 'continue_page_setup' campaign.id %}">Continue Page Setup</a>
+        {% endif %}
+      </td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="4">No campaigns found.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

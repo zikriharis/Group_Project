@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Subscriptions</h2>
+<table>
+  <tr>
+    <th>Campaign</th>
+    <th>Status</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Actions</th>
+  </tr>
+  {% for sub in subscriptions %}
+    <tr>
+      <td><a href="{% url 'campaign_detail' sub.campaign.slug %}">{{ sub.campaign.title }}</a></td>
+      <td>{{ sub.status }}</td>
+      <td>{{ sub.created_at|date:"Y-m-d" }}</td>
+      <td>{{ sub.end_date|date:"Y-m-d" }}</td>
+      <td>
+        {% if sub.status == "active" %}
+          <a href="{% url 'request_refund' sub.campaign.id %}">Request Refund</a>
+        {% endif %}
+      </td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="5">No subscriptions found.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

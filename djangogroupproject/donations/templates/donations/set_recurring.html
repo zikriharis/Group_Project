@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Set Up Recurring Donation</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Set Recurring Donation</button>
+</form>
+{% endblock %}

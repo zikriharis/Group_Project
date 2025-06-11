@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Share "{{ campaign.title }}"</h2>
+<p>Share this campaign on:</p>
+<ul>
+  <li>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">Facebook</a>
+  </li>
+  <li>
+    <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text=Support%20this%20campaign!">Twitter/X</a>
+  </li>
+  <li>
+    <a href="mailto:?subject=Support%20{{ campaign.title }}&body=Check out this campaign: {{ request.build_absolute_uri }}">Email</a>
+  </li>
+</ul>
+<p>Or copy this link:</p>
+<input type="text" value="{{ request.build_absolute_uri }}" readonly onclick="this.select();">
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Donation Statistics</h2>
+<ul>
+  <li>Total Donated: {{ stats.total_donated }}</li>
+  <li>Campaigns Supported: {{ stats.campaigns_supported }}</li>
+  <li>Recurring Donations: {{ stats.recurring }}</li>
+</ul>
+<h3>Donation History</h3>
+<canvas id="donationChart" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  var ctx = document.getElementById('donationChart').getContext('2d');
+  var donationChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{ stats.donation_dates|safe }},
+      datasets: [{
+        label: 'Donation Amount',
+        data: {{ stats.donation_amounts|safe }},
+        backgroundColor: 'green'
+      }]
+    }
+  });
+</script>
+<h3>Badges</h3>
+<ul>
+  {% for badge in badges %}
+    <li>{{ badge.badge_type }} ({{ badge.awarded_at|date:"Y-m-d" }})</li>
+  {% empty %}
+    <li>No badges earned yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

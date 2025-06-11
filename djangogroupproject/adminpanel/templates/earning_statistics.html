@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Platform Earnings & Statistics</h2>
+<ul>
+  <li>Total Subscription Earnings: {{ stats.total_earnings }}</li>
+  <li>Active Campaigns: {{ stats.active_campaigns }}</li>
+  <li>Donations Processed: {{ stats.total_donations }}</li>
+</ul>
+<canvas id="earningsChart" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  var ctx = document.getElementById('earningsChart').getContext('2d');
+  var earningsChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: {{ stats.earnings_dates|safe }},
+      datasets: [{
+        label: 'Earnings',
+        data: {{ stats.earnings_amounts|safe }},
+        fill: false,
+        borderColor: '#16a085'
+      }]
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Liked Campaigns</h2>
+<ul>
+  {% for like in likes %}
+    <li>
+      <a href="{% url 'campaign_detail' like.campaign.slug %}">{{ like.campaign.title }}</a>
+      <form method="post" action="{% url 'unlike_campaign' like.campaign.id %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Unlike</button>
+      </form>
+    </li>
+  {% empty %}
+    <li>You haven't liked any campaigns yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

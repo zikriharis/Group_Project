@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Organization Reports & Statistics</h2>
+<ul>
+  <li>Total Campaigns: {{ stats.total_campaigns }}</li>
+  <li>Active: {{ stats.active }}</li>
+  <li>Completed: {{ stats.completed }}</li>
+  <li>Total Donations: {{ stats.total_donations }}</li>
+  <li>Unique Donors: {{ stats.unique_donors }}</li>
+</ul>
+<h3>Donations Over Time</h3>
+<canvas id="donationChart" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  let ctx = document.getElementById('donationChart').getContext('2d');
+  let donationChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: {{ stats.donation_dates|safe }},
+      datasets: [{
+        label: 'Donations',
+        data: {{ stats.donation_amounts|safe }},
+        fill: false,
+        borderColor: 'blue'
+      }]
+    }
+  });
+</script>
+{% endblock %}

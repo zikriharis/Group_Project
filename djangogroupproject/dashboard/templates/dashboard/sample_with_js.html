@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Copy Link Example</h2>
+<div class="input-group mb-3">
+    <input type="text" id="share-link" class="form-control" value="https://example.com/campaign/123/" readonly>
+    <button class="btn btn-outline-secondary" type="button" onclick="copyLink()">Copy</button>
+</div>
+<div id="copy-message" class="text-success" style="display:none;">Copied!</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+function copyLink() {
+    var copyText = document.getElementById("share-link");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+    document.execCommand("copy");
+    document.getElementById("copy-message").style.display = "block";
+    setTimeout(() => {
+        document.getElementById("copy-message").style.display = "none";
+    }, 2000);
+}
+</script>
+{% endblock %}

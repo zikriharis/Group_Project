@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Fraud Reports</h2>
+<table>
+  <tr>
+    <th>Campaign</th>
+    <th>Reporter</th>
+    <th>Reason</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+  {% for report in fraud_reports %}
+    <tr>
+      <td><a href="{% url 'campaign_detail' report.campaign.slug %}">{{ report.campaign.title }}</a></td>
+      <td>{{ report.reporter }}</td>
+      <td>{{ report.reason }}</td>
+      <td>{{ report.status }}</td>
+      <td>
+        {% if report.status == 'pending' %}
+          <a href="{% url 'review_fraud_report' report.id %}">Review</a>
+        {% endif %}
+      </td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="5">No fraud reports.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

@@ -1,19 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Organization Dashboard</h2>
-<p>Welcome, {{ user.username }} ({{ user.organization.name }})</p>
-<ul>
-  <li><a href="{% url 'create_campaign' %}">Create Campaign</a></li>
-  <li><a href="{% url 'manage_team' %}">Manage Team</a></li>
-  <li><a href="{% url 'org_reports' %}">Reports & Statistics</a></li>
-  <li><a href="{% url 'org_subscription' %}">Subscription & Payments</a></li>
-  <li><a href="{% url 'org_notifications' %}">Notifications</a></li>
-  <li><a href="{% url 'edit_org_profile' %}">Edit Organization Profile</a></li>
-</ul>
+<p>Welcome, {{ user.organization.name }}!</p>
+<nav>
+  <a href="{% url 'create_campaign' %}">Create Campaign</a> |
+  <a href="{% url 'manage_team' %}">Manage Team</a> |
+  <a href="{% url 'org_reports' %}">Reports & Statistics</a> |
+  <a href="{% url 'org_subscription' %}">Subscription & Payments</a> |
+  <a href="{% url 'org_notifications' %}">Notifications</a> |
+  <a href="{% url 'edit_org_profile' %}">Edit Profile</a>
+</nav>
+<hr>
 <h3>Your Campaigns</h3>
 <table>
   <tr>
-    <th>Title</th><th>Status</th><th>Goal</th><th>Current</th><th>Approval</th><th>Actions</th>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Goal</th>
+    <th>Current</th>
+    <th>Approval</th>
+    <th>Actions</th>
   </tr>
   {% for campaign in campaigns %}
     <tr>

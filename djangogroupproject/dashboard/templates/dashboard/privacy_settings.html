@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Privacy and Profile Settings</h2>
+<form method="post">
+  {% csrf_token %}
+  <label>
+    <input type="checkbox" name="show_donations" {% if user.profile.show_donations %}checked{% endif %}>
+    Show my donations publicly
+  </label><br>
+  <label>
+    <input type="checkbox" name="show_name" {% if user.profile.show_name %}checked{% endif %}>
+    Show my name publicly
+  </label><br>
+  <label>
+    <input type="checkbox" name="email_updates" {% if user.profile.email_updates %}checked{% endif %}>
+    Receive email updates
+  </label><br>
+  <button type="submit">Update Settings</button>
+</form>
+{% endblock %}

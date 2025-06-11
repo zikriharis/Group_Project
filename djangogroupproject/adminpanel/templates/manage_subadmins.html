@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Manage Subadmins</h2>
+<form method="post" action="{% url 'add_subadmin' %}">
+  {% csrf_token %}
+  <input type="email" name="email" placeholder="Subadmin Email" required>
+  <button type="submit">Add Subadmin</button>
+</form>
+<ul>
+  {% for subadmin in subadmins %}
+    <li>
+      {{ subadmin.username }} ({{ subadmin.email }})
+      <form method="post" action="{% url 'remove_subadmin' subadmin.id %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" onclick="return confirm('Remove this subadmin?');">Remove</button>
+      </form>
+    </li>
+  {% empty %}
+    <li>No subadmins yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

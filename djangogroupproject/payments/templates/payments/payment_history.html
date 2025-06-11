@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Campaign Report</h2>
+<p>Campaign: <a href="{% url 'campaign_detail' campaign.slug %}">{{ campaign.title }}</a></p>
+<ul>
+  <li>Total Donations: {{ report.total_donations }}</li>
+  <li>Unique Donors: {{ report.unique_donors }}</li>
+  <li>Current Amount: {{ campaign.current_amount }}</li>
+  <li>Goal: {{ campaign.goal_amount }}</li>
+  <li>Status: {{ campaign.status }}</li>
+</ul>
+<h3>Donation Trend</h3>
+<canvas id="donationTrend" width="400" height="200"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  var ctx = document.getElementById('donationTrend').getContext('2d');
+  var donationTrend = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: {{ report.donation_dates|safe }},
+      datasets: [{
+        label: 'Donations',
+        data: {{ report.donation_amounts|safe }},
+        fill: false,
+        borderColor: 'purple'
+      }]
+    }
+  });
+</script>
+{% endblock %}

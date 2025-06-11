@@ -1,25 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Admin Dashboard</h2>
-<ul>
-  <li><a href="{% url 'admin_campaign_requests' %}">Review Campaign Requests</a></li>
-  <li><a href="{% url 'admin_orgs' %}">Manage Organizations</a></li>
-  <li><a href="{% url 'admin_earnings' %}">Earnings & Statistics</a></li>
-  <li><a href="{% url 'admin_roles' %}">Manage Roles & SubAdmins</a></li>
-  <li><a href="{% url 'admin_fraud_reports' %}">Fraud Reports</a></li>
-</ul>
+<nav>
+  <a href="{% url 'admin_campaign_requests' %}">Review Campaign Requests</a> |
+  <a href="{% url 'admin_orgs' %}">Manage Organizations</a> |
+  <a href="{% url 'admin_earnings' %}">Earnings & Statistics</a> |
+  <a href="{% url 'admin_roles' %}">Manage Roles & SubAdmins</a> |
+  <a href="{% url 'admin_fraud_reports' %}">Fraud Reports</a>
+</nav>
+<hr>
 <h3>Recent Campaign Requests</h3>
 <table>
-  <tr><th>Campaign</th><th>Type</th><th>Status</th><th>Action</th></tr>
-  {% for request in recent_requests %}
+  <tr>
+    <th>Campaign</th>
+    <th>Type</th>
+    <th>Status</th>
+    <th>Submitted</th>
+    <th>Action</th>
+  </tr>
+  {% for req in recent_requests %}
     <tr>
-      <td>{{ request.campaign.title }}</td>
-      <td>{{ request.request_type }}</td>
-      <td>{{ request.status }}</td>
-      <td><a href="{% url 'admin_review_campaign' request.id %}">Review</a></td>
+      <td>{{ req.campaign.title }}</td>
+      <td>{{ req.request_type }}</td>
+      <td>{{ req.status }}</td>
+      <td>{{ req.created_at|date:"Y-m-d H:i" }}</td>
+      <td><a href="{% url 'admin_review_campaign' req.id %}">Review</a></td>
     </tr>
   {% empty %}
-    <tr><td colspan="4">No requests found.</td></tr>
+    <tr><td colspan="5">No campaign requests found.</td></tr>
   {% endfor %}
 </table>
+<hr>
+<h3>Quick Stats</h3>
+<ul>
+  <li>Total Campaigns: {{ stats.total_campaigns }}</li>
+  <li>Active Campaigns: {{ stats.active_campaigns }}</li>
+  <li>Donations (all time): {{ stats.donation_total }}</li>
+  <li>Organizations: {{ stats.total_orgs }}</li>
+  <li>Users: {{ stats.total_users }}</li>
+</ul>
 {% endblock %}

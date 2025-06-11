@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Manage Campaigns</h2>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Status</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Actions</th>
+  </tr>
+  {% for campaign in campaigns %}
+    <tr>
+      <td><a href="{% url 'campaign_detail' campaign.slug %}">{{ campaign.title }}</a></td>
+      <td>{{ campaign.status }}</td>
+      <td>{{ campaign.start_date }}</td>
+      <td>{{ campaign.end_date }}</td>
+      <td>
+        <a href="{% url 'edit_campaign' campaign.slug %}">Edit</a> |
+        <a href="{% url 'campaign_report' campaign.slug %}">Report</a> |
+        {% if campaign.status == "active" %}
+          <a href="{% url 'stop_campaign' campaign.id %}">Stop</a>
+        {% else %}
+          <a href="{% url 'start_campaign' campaign.id %}">Start</a>
+        {% endif %}
+      </td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="5">No campaigns found.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

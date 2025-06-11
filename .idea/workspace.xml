@@ -4,58 +4,73 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="Donations application update">
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/templates/campaigns/block_add.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/templates/campaigns/create.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/templates/campaigns/detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/templates/campaigns/document_add.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/templates/campaigns/filter.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/templates/campaigns/fraud_report.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/templates/campaigns/list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/admin_dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/donor_dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/manager_dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/org_dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/donations/templates/donations/donate.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/donations/templates/donations/recurring.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/notifications/templates/notifications/list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/organizations/templates/organizations/create.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/organizations/templates/organizations/detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/organizations/templates/organizations/list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/payments/templates/payments/subscribe.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/sharing/templates/sharing/bookmark.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/sharing/templates/sharing/share.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/support/templates/support/contact_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/support/templates/support/help_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/support/templates/support/ticket_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/tags/templates/tags/create.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/tags/templates/tags/list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/users/templates/users/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/users/templates/users/profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/djangogroupproject/users/templates/users/register.html" afterDir="false" />
+    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="templates and forms">
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/adminpanel/templates/earning_statistics.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/adminpanel/templates/manage_roles.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/adminpanel/templates/manage_subadmins.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/api/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/api/serializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/api/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/api/viewsets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/templates/campaigns/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/templates/campaigns/share_socials.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/campaign_approval_status.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/campaign_donors.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/campaign_report.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/campaign_statistics.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/donor_badges.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/donor_likes.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/donor_stats.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/edit_org_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/edit_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/manage_campaigns.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/notifications.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/org_reports.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/org_subscription.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/organization_donor_stats.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/organization_donors.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/privacy_settings.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/sample_with_js.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/team_management.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/donations/templates/donations/payment_methods.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/donations/templates/donations/set_recurring.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/middleware/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/middleware/custom_logging_middleware.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/organizations/templates/organizations/edit_org_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/payments/templates/payments/payment_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/payments/templates/payments/payment_methods.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/payments/templates/payments/refund_request.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/payments/templates/payments/subscription_management.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/payments/templates/payments/subscription_refund_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/reports/templates/reports/fraud_report_management.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/static/css/custom.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/templates/campaigns/campaign_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/users/templates/users/edit_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/views/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/views/campaign_list.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/views/password_hashing_example.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/djangogroupproject/views/session_example.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Group_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Group_Project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/notifications/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/notifications/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/notifications/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/notifications/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/notifications/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/notifications/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/payments/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/payments/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/payments/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/payments/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/payments/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/payments/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/sharing/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/sharing/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/sharing/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/sharing/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/sharing/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/sharing/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/support/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/support/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/support/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/support/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/support/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/support/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/admin_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/admin_dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/donor_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/donor_dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/manager_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/manager_dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/org_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/dashboard/templates/dashboard/org_dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="Python Script" />
         <option value="HTML File" />
       </list>
@@ -70,16 +85,16 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "history": [
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
     {
-      "assignee": "zikriharis"
+      &quot;assignee&quot;: &quot;zikriharis&quot;
     }
   ],
-  "lastFilter": {
-    "assignee": "zikriharis"
+  &quot;lastFilter&quot;: {
+    &quot;assignee&quot;: &quot;zikriharis&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/zikriharis/Group_Project.git&quot;,
@@ -93,7 +108,6 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2y4dWF3BT6WgsJghXHecEdZTutu" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -101,11 +115,21 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/zikri/OneDrive/Desktop/Sem_2/WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT/Group_Project/djangogroupproject/tags/migrations",
-    "settings.editor.selected.configurable": "preferences.pathVariables"
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.intellij.python.django.customization.DjangoModulesConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
@@ -125,7 +149,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-4f4e415b4190-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.26053.29" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-PY-251.25410.159" />
+        <option value="bundled-python-sdk-e0ed3721d81e-36ea0e71a18c-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.25410.159" />
       </set>
     </attachedChunks>
   </component>
@@ -137,6 +162,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1749097808444</updated>
+      <workItem from="1749632437333" duration="5305000" />
     </task>
     <task id="LOCAL-00001" summary="Startup settings">
       <option name="closed" value="true" />
@@ -202,8 +228,19 @@
       <option name="project" value="LOCAL" />
       <updated>1749281114338</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="templates and forms">
+      <option name="closed" value="true" />
+      <created>1749469113936</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1749469113936</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Startup settings" />
@@ -214,6 +251,7 @@
     <MESSAGE value="Update campaigns, donations, notifications, payments, sharing, support models.py" />
     <MESSAGE value="Update application campaigns, users, organizations,tags models.py, forms.py, views.py, admin.py" />
     <MESSAGE value="Donations application update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Donations application update" />
+    <MESSAGE value="templates and forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="templates and forms" />
   </component>
 </project>

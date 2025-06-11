@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Refund Requests</h2>
+<table>
+  <tr>
+    <th>Campaign</th>
+    <th>Reason</th>
+    <th>Status</th>
+    <th>Requested At</th>
+    <th>Actions</th>
+  </tr>
+  {% for refund in refunds %}
+    <tr>
+      <td><a href="{% url 'campaign_detail' refund.campaign.slug %}">{{ refund.campaign.title }}</a></td>
+      <td>{{ refund.reason }}</td>
+      <td>{{ refund.status }}</td>
+      <td>{{ refund.created_at|date:"Y-m-d H:i" }}</td>
+      <td>
+        {% if refund.status == 'pending' %}
+          <a href="{% url 'cancel_refund' refund.id %}">Cancel</a>
+        {% endif %}
+      </td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="5">No refund requests.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Payment Methods</h2>
+<ul>
+  {% for method in payment_methods %}
+    <li>
+      {{ method.display_name }} (****{{ method.last4 }})
+      {% if method.is_default %} <strong>[Default]</strong>{% endif %}
+      <form method="post" action="{% url 'remove_payment_method' method.id %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Remove</button>
+      </form>
+    </li>
+  {% empty %}
+    <li>No payment methods saved.</li>
+  {% endfor %}
+</ul>
+<h3>Add Payment Method</h3>
+<form method="post" action="{% url 'add_payment_method' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Add Method</button>
+</form>
+{% endblock %}

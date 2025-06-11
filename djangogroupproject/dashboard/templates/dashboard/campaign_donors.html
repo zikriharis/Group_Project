@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Donors for Campaign: {{ campaign.title }}</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Donation Amount</th>
+    <th>Date</th>
+  </tr>
+  {% for donation in donations %}
+    <tr>
+      <td>{% if not donation.is_anonymous %}{{ donation.donor_name|default:donation.user.get_full_name }}{% else %}Anonymous{% endif %}</td>
+      <td>{{ donation.amount }} {{ donation.currency }}</td>
+      <td>{{ donation.created_at|date:"Y-m-d" }}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="3">No donations yet.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

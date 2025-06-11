@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Campaigns{% endblock %}
+{% block content %}
+<h2>All Campaigns</h2>
+<div class="row">
+    {% for campaign in campaigns %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ campaign.title }}</h5>
+                <p class="card-text">
+                    Goal: <strong>${{ campaign.goal_amount }}</strong><br>
+                    Raised: <strong>${{ campaign.current_amount }}</strong>
+                </p>
+                <a href="{% url 'campaign_detail' campaign.id %}" class="btn btn-primary btn-sm">View</a>
+                <button class="btn btn-outline-secondary btn-sm" onclick="copyToClipboard('{{ request.build_absolute_uri|slice:':-1' }}{{ campaign.get_absolute_url }}')">Copy Link</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div id="copy-feedback" class="alert alert-success mt-2" style="display:none;">Link copied!</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        document.getElementById('copy-feedback').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('copy-feedback').style.display = 'none';
+        }, 1500);
+    });
+}
+</script>
+{% endblock %}

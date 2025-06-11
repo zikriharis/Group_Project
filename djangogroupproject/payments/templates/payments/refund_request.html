@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Request Refund for Subscription</h2>
+<form method="post">
+  {% csrf_token %}
+  <label for="campaign">Campaign:</label>
+  <select name="campaign" id="campaign">
+    {% for sub in subscriptions %}
+      <option value="{{ sub.campaign.id }}">{{ sub.campaign.title }}</option>
+    {% endfor %}
+  </select>
+  <label for="reason">Reason for Refund:</label>
+  <textarea name="reason" id="reason" required></textarea>
+  <button type="submit">Request Refund</button>
+</form>
+{% if message %}
+  <p style="color:green;">{{ message }}</p>
+{% endif %}
+{% endblock %}

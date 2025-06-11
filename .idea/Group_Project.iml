@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="django" name="Django">
+      <configuration>
+        <option name="rootFolder" value="$MODULE_DIR$/djangogroupproject" />
+        <option name="settingsModule" value="djangogroupproject/settings.py" />
+        <option name="manageScript" value="manage.py" />
+        <option name="environment" value="&lt;map/&gt;" />
+        <option name="doNotUseTestRunner" value="false" />
+        <option name="trackFilePattern" value="" />
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13 virtualenv at C:\Users\zikri\OneDrive\Desktop\Sem_2\WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT\Group_Project\.venv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_CONFIGURATION" value="Django" />
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/djangogroupproject/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/campaigns/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/dashboard/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/donations/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/notifications/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/organizations/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/payments/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/sharing/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/support/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/tags/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/users/templates" />
+        <option value="$MODULE_DIR$/djangogroupproject/adminpanel/templates" />
+      </list>
+    </option>
   </component>
 </module>

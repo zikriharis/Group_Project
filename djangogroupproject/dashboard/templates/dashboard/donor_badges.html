@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Your Badges</h2>
+<ul>
+  {% for badge in badges %}
+    <li>
+      <strong>{{ badge.badge_type }}</strong>
+      <br>
+      Awarded: {{ badge.awarded_at|date:"Y-m-d" }}
+    </li>
+  {% empty %}
+    <li>No badges earned yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
