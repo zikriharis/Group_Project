@@ -4,5 +4,5 @@ from .models import Organization
 class OrganizationForm(forms.ModelForm):
     class Meta:
         model = Organization
-        fields = ('name', 'logo', 'description', 'website', 'country', 'address', 'contact_email')
+        fields = ('name', 'logo', 'description', 'website', 'address', 'contact_email')
 

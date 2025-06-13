@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
-from campaigns.models import Campaign
+from djangogroupproject.campaigns.models import Campaign
 
 class CampaignListView(LoginRequiredMixin, ListView):
     """

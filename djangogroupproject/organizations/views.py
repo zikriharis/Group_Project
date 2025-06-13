@@ -20,7 +20,7 @@ Here, {{ form.as_p }} works because you gave the template access to a variable n
 def organization_list(request):
     # Fetches all instances of the Organization model from the database
     orgs = Organization.objects.all() # return a query set containing every record in the organization table
-    return render(request, 'organization/list.html', {'organization': orgs}) # render the
+    return render(request, 'organizations/list.html', {'organization': orgs}) # render the
     # organization/list.html, pass context dictionary 'organization' refers to orgs queryset
 
 def organization_detail(request, org_id):

@@ -1,8 +1,8 @@
 from rest_framework import viewsets, permissions
-from campaigns.models import Campaign
-from organizations.models import Organization
-from donations.models import Donation
-from tags.models import Tag
+from djangogroupproject.campaigns.models import Campaign
+from djangogroupproject.organizations.models import Organization
+from djangogroupproject.donations.models import Donation
+from djangogroupproject.tags.models import Tag
 from .serializers import (
     CampaignSerializer, OrganizationSerializer, DonationSerializer, TagSerializer
 )

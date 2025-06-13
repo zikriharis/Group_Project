@@ -4,10 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="add templates">
+    <list default="true" id="1b21dbc2-801f-4591-9f54-d8b985eb55a8" name="Changes" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/Group_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Group_Project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangogroupproject/adminpanel/templates/earning_statistics.html" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/adminpanel/templates/earning_statistics.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/api/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/api/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/api/viewsets.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/api/viewsets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/campaigns/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/campaigns/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/djangogroupproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/djangogroupproject/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/donations/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/donations/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/donations/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/donations/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/main_landing_pages/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/main_landing_pages/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/main_landing_pages/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/main_landing_pages/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/main_landing_pages/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/main_landing_pages/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/main_landing_pages/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/organizations/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/organizations/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/organizations/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/organizations/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/organizations/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/organizations/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/reports/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/reports/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/reports/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/reports/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/reports/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/reports/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/reports/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/reports/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/views/campaign_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/views/campaign_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangogroupproject/views/session_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangogroupproject/views/session_example.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,31 +84,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/zikri/OneDrive/Desktop/Sem_2/WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT/Group_Project/djangogroupproject/tags/migrations",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.intellij.python.django.customization.DjangoModulesConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zikri/OneDrive/Desktop/Sem_2/WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT/Group_Project/djangogroupproject/tags/migrations&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.python.django.customization.DjangoModulesConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\zikri\OneDrive\Desktop\Sem_2\WOC7014 - FRAMEWORK-BASED SOFTWARE DESIGN AND DEVELOPMENT\Group_Project\djangogroupproject\tags\migrations" />
@@ -112,7 +134,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1749097808444</updated>
-      <workItem from="1749632437333" duration="6191000" />
+      <workItem from="1749632437333" duration="13848000" />
+      <workItem from="1749826041594" duration="103000" />
     </task>
     <task id="LOCAL-00001" summary="Startup settings">
       <option name="closed" value="true" />
@@ -202,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749642282891</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="update">
+      <option name="closed" value="true" />
+      <created>1749643197128</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1749643197128</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +250,7 @@
     <MESSAGE value="Donations application update" />
     <MESSAGE value="templates and forms" />
     <MESSAGE value="add templates" />
-    <option name="LAST_COMMIT_MESSAGE" value="add templates" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>

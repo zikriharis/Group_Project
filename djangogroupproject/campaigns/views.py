@@ -33,7 +33,7 @@ def campaign_create(request):
             return redirect('campaign_list') # NEED TO CHANGE THIS to redirect to the campaign's detail page
     else:
         form = CampaignForm()
-    return render(request, 'campaign/create.html', {'form':form})
+    return render(request, 'campaigns/create.html', {'form':form})
 
 # Find campaign-id, bind new block to campaign before saving, r
 def campaign_block_add(request, campaign_id):

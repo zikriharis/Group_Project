@@ -10,7 +10,7 @@ appears in the admin interface.
 '''
 @admin.register(Organization)
 class OrganizationAdmin(admin.ModelAdmin):
-    list_display = ('name', 'country', 'website', 'contact_email')
+    list_display = ('name', 'website', 'contact_email')
     '''
     defines the columns that will be shown in the list view
     of the Django admin panel for the Organization model

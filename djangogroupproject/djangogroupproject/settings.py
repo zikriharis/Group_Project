@@ -37,7 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main_landing_pages',
+    'adminpanel',
+    'api',
+    'campaigns',
+    'dashboard',
+    'donations',
+    'middleware',
+    'notifications',
+    'organizations',
+    'payments',
+    'reports',
+    'rest_framework',
+    'sharing',
+    'support',
+    'tags',
+    'users',
 ]
 
 MIDDLEWARE = [
